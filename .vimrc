@@ -1,39 +1,52 @@
 set nocompatible              " be iMproved
 filetype off                  " required!
-set rtp+=~/.vim/bundle/vundle/
+set rtp+=~/.vim/Bundle/vundle/
 call vundle#rc()
 ""vundle
 Bundle 'gmarik/vundle'
-"UI related
+"ui related
 Bundle 'tomasr/molokai'
 Bundle 'junegunn/goyo.vim'
 " Bundle 'nathanaelkane/vim-indent-guides'
 " Bundle 'tpope/vim-surround'
 Bundle 'bling/vim-airline'
-"Language Support
-Bundle 'jcfaria/Vim-R-plugin'
+Bundle 'edkolev/tmuxline.vim'
+"language support
+Bundle 'jcfaria/vim-r-plugin'
+Bundle 'JuliaLang/julia-vim'
 " Bundle 'davidhalter/jedi-vim'
-Bundle 'LaTeX-Box-Team/LaTeX-Box'
+Bundle 'latex-box-team/latex-box'
 Bundle 'gerw/vim-latex-suite'
 Bundle "derekwyatt/vim-scala"
 "window managment
 Bundle 'ervandew/screen'
 Bundle 'christoomey/vim-tmux-navigator'
-" Bundle 'ervandew/supertab'
-" Move around
-Bundle 'Lokaltog/vim-easymotion'
-" IDE stuff
+Bundle 'ervandew/supertab'
+" move around
+Bundle 'lokaltog/vim-easymotion'
+" ide stuff
 Bundle 'kien/ctrlp.vim'
-" Bundle 'JazzCore/ctrlp-cmatcher'
+Bundle 'jazzcore/ctrlp-cmatcher'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'majutsushi/tagbar'
 Bundle 'tomtom/tcomment_vim'
-Bundle 'tpope/vim-fugitive'
+" Bundle 'tpope/vim-commentary'
 Bundle 'jceb/vim-orgmode'
-Bundle "scrooloose/nerdtree"
-Bundle "SirVer/ultisnips"
-Bundle "honza/vim-snippets"
-Bundle "Valloric/YouCompleteMe"
+Bundle 'tpope/vim-speeddating'
+" Bundle 'scrooloose/nerdtree'
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
+" Bundle 'Valloric/YouCompleteMe'
+Bundle 'Shougo/neocomplete.vim'
+
+Bundle 'scrooloose/syntastic'
+
+"remote editing
+" Bundle 'eiginn/netrw'
+Bundle 'tpope/vim-fugitive'
+" Bundle 'tpope/vim-vinegar'
+
+
 
 filetype plugin indent on
 syntax on
@@ -44,6 +57,7 @@ nmap <Space> <Plug>(easymotion-bd-f)
 set tabstop=4
 au FileType python setlocal ts=8 et sw=4 sts=4
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
+set mouse=a
 " let g:Powerline_symbols = 'unicode'
 
 "set hidden
@@ -59,7 +73,7 @@ map <c-h> <c-w>h
 " let g:EasyMotion_leader_key = '<Leader>'
 " set whichwrap+=<,>,h,l,[,]
 " set background=dark
-"colorscheme solarized
+" colorscheme solarized
 " let g:molokai_original = 1
 " let g:rehash256 = 1
 colorscheme molokai
@@ -99,12 +113,19 @@ imap <silent><F2> <Esc>:NERDTreeToggle<CR>
 " let tlist_make_settings  = 'make;m:makros;t:targets'
 
 "Air line
+" let g:airline#extensions#tabline#enabled =1
 let g:airline_left_sep = '»'
 let g:airline_left_sep = '▶'
 let g:airline_right_sep = '«'
 let g:airline_right_sep = '◀'
 let g:airline#extensions#whitespace#enabled = 0
-
+let g:tmuxline_powerline_separators = 0
+let g:tmuxline_separators = {
+			\ 'left' : '',
+			\ 'left_alt': '>',
+			\ 'right' : '',
+			\ 'right_alt' : '<',
+			\ 'space' : ' '}
 
 " The Silver Search
 if executable('ag')
@@ -124,10 +145,10 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 nmap <silent><leader>r :CtrlPMRUFiles<CR>
 nmap <C-T> :CtrlPBufTagAll<CR>
 nmap <C-E> :!ctags *<CR>:CtrlPTag<CR>
-" let g:ctrlp_match_func = {'match':'matcher#cmatch'}
+let g:ctrlp_match_func = {'match':'matcher#cmatch'}
 let g:ctrlp_buftag_types={
-\'tex':'',
-\'r':'',
+			\'tex':'',
+			\'r':'',
 			\}
 " \ 'Splus':{
 " \	'bin':'ctags',
@@ -181,12 +202,58 @@ inoremap <C-S-Tab> <ESC>:tabp<cr>
 nnoremap <C-S-Tab> :tabp<cr>
 set go=egmL
 
+"netrw 
+let g:netrw_altv          = 1
+let g:netrw_fastbrowse    = 2
+let g:netrw_keepdir       = 0
+let g:netrw_liststyle     = 2
+let g:netrw_retmap        = 1
+let g:netrw_silent        = 1
+let g:netrw_special_syntax= 1
+"
+
+" Toggle Vexplore with Ctrl-E
+function! ToggleVExplorer()
+	if exists("t:expl_buf_num")
+		let expl_win_num = bufwinnr(t:expl_buf_num)
+		if expl_win_num != -1
+			let cur_win_nr = winnr()
+			exec expl_win_num . 'wincmd w'
+			close
+			exec cur_win_nr . 'wincmd w'
+			unlet t:expl_buf_num
+		else
+			unlet t:expl_buf_num
+		endif
+	else
+		exec '1wincmd w'
+		Vexplore
+		let t:expl_buf_num = bufnr("%")
+	endif
+endfunction
+map <silent> <C-E> :call ToggleVExplorer()<CR>
+" Hit enter in the file browser to open the selected
+" file with :vsplit to the right of the browser.
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+
+" Default to tree mode
+let g:netrw_liststyle=3
+
+" Change directory to the current buffer when opening files.
+set autochdir
+
 "Zen mode
 nnoremap <Leader>z :Goyo<CR>
 let g:goyo_margin_top=2
 let g:goyo_margin_bottom=0
 
+"Disable auto comment
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 " set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.aux,*.toc,*.pdfsync,*.pyc,*.gz,*.bbl
 
 " autocmd vimenter * if !argc() | NERDTree | endif
 " autocmd vimenter * if !argc() | CommandT | endif
+
+so neocompl.vim
