@@ -1,0 +1,7 @@
+[user]
+	name = Zeyu Zhou
+	email = adouzzy@gmail.com
+[push]
+	default = simple
+[oh-my-zsh]
+	hide-status = 1
