@@ -15,8 +15,10 @@ Bundle 'edkolev/tmuxline.vim'
 Bundle 'jcfaria/vim-r-plugin'
 Bundle 'JuliaLang/julia-vim'
 " Bundle 'davidhalter/jedi-vim'
-Bundle 'latex-box-team/latex-box'
-Bundle 'gerw/vim-latex-suite'
+" Bundle 'gerw/vim-latex-suite'
+" Bundle 'jcf/vim-latex'
+Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
+" Bundle 'latex-box-team/latex-box'
 Bundle "derekwyatt/vim-scala"
 "window managment
 Bundle 'ervandew/screen'
@@ -31,7 +33,12 @@ Bundle 'terryma/vim-multiple-cursors'
 Bundle 'majutsushi/tagbar'
 Bundle 'tomtom/tcomment_vim'
 " Bundle 'tpope/vim-commentary'
+"" ORG MODE
 Bundle 'jceb/vim-orgmode'
+Bundle 'mattn/calendar-vim'
+Bundle 'tpope/vim-speeddating'
+Bundle 'vim-scripts/utl.vim'
+
 Bundle 'tpope/vim-speeddating'
 " Bundle 'scrooloose/nerdtree'
 Bundle 'SirVer/ultisnips'
@@ -51,7 +58,11 @@ Bundle 'tpope/vim-fugitive'
 filetype plugin indent on
 syntax on
 set sw=4
-nmap <Space> <Plug>(easymotion-bd-f)
+set vb
+nmap <Space> <Plug>(easymotion-bd-w)
+noremap <M-Space> <Plug>(easymotion-bd-f)
+" map <Leader>e <Plug>(easymotion-prefix)
+" let g:EasyMotion_leader_key='<Leader>e'
 " set autoindent
 " set lazyredraw
 set tabstop=4
@@ -63,15 +74,15 @@ set mouse=a
 "set hidden
 
 "Window Splits
-map <c-j> <c-w>j
-map <c-k> <c-w>k
-map <c-l> <c-w>l
-map <c-h> <c-w>h
+" imap <c-j> <c-w>j
+" imap <c-k> <c-w>k
+" imap <c-l> <c-w>l
+" imap <c-h> <c-w>h
 
 
 "Easymotion default leader
 " let g:EasyMotion_leader_key = '<Leader>'
-" set whichwrap+=<,>,h,l,[,]
+set whichwrap+=<,>,h,l,[,]
 " set background=dark
 " colorscheme solarized
 " let g:molokai_original = 1
@@ -85,16 +96,18 @@ hi IndentGuidesEven ctermbg=236
 
 
 "Snipets
-let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsExpandTrigger="<c-l>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 
 "screen
-let g:ScreenImpl = 'Tmux'
+let g:ScreenImpl ='Tmux'
+" let g:ScreenShellExternal=1
+" let g:ScreenShellTerminal='iTerm'
 nmap <C-c><C-c> :ScreenShell<cr>
 nmap <leader>pd {v}:ScreenSend<cr>}<Down>
-let g:ScreenShellHeight = 0 
+" let g:ScreenShellHeight=0 
 
 nmap [p {v}:ScreenSend<cr>}<Down>
 
@@ -256,4 +269,4 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " autocmd vimenter * if !argc() | NERDTree | endif
 " autocmd vimenter * if !argc() | CommandT | endif
 
-so neocompl.vim
+so ~/.vim/neocompl.vim
