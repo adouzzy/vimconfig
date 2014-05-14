@@ -13,13 +13,14 @@ Bundle 'bling/vim-airline'
 Bundle 'edkolev/tmuxline.vim'
 "language support
 Bundle 'jcfaria/vim-r-plugin'
-Bundle 'JuliaLang/julia-vim'
+" Bundle 'JuliaLang/julia-vim'
 " Bundle 'davidhalter/jedi-vim'
 " Bundle 'gerw/vim-latex-suite'
 " Bundle 'jcf/vim-latex'
 Bundle 'git://vim-latex.git.sourceforge.net/gitroot/vim-latex/vim-latex'
 " Bundle 'latex-box-team/latex-box'
-Bundle "derekwyatt/vim-scala"
+" Bundle "derekwyatt/vim-scala"
+
 "window managment
 Bundle 'ervandew/screen'
 Bundle 'christoomey/vim-tmux-navigator'
@@ -34,23 +35,23 @@ Bundle 'majutsushi/tagbar'
 Bundle 'tomtom/tcomment_vim'
 " Bundle 'tpope/vim-commentary'
 "" ORG MODE
-Bundle 'jceb/vim-orgmode'
-Bundle 'mattn/calendar-vim'
-Bundle 'tpope/vim-speeddating'
-Bundle 'vim-scripts/utl.vim'
+" Bundle 'jceb/vim-orgmode'
+" Bundle 'mattn/calendar-vim'
+" Bundle 'tpope/vim-speeddating'
+" Bundle 'vim-scripts/utl.vim'
 
-Bundle 'tpope/vim-speeddating'
+" Bundle 'tpope/vim-speeddating'
 " Bundle 'scrooloose/nerdtree'
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
-" Bundle 'Valloric/YouCompleteMe'
-Bundle 'Shougo/neocomplete.vim'
+Bundle 'Valloric/YouCompleteMe'
+" Bundle 'Shougo/neocomplete.vim'
 
-Bundle 'scrooloose/syntastic'
+" Bundle 'scrooloose/syntastic'
 
 "remote editing
 " Bundle 'eiginn/netrw'
-Bundle 'tpope/vim-fugitive'
+" Bundle 'tpope/vim-fugitive'
 " Bundle 'tpope/vim-vinegar'
 
 
@@ -62,15 +63,21 @@ set vb
 nmap <Space> <Plug>(easymotion-bd-w)
 noremap <M-Space> <Plug>(easymotion-bd-f)
 " map <Leader>e <Plug>(easymotion-prefix)
-" let g:EasyMotion_leader_key='<Leader>e'
 " set autoindent
-" set lazyredraw
+"fast reponse
+set nolazyredraw
+" set nofsync
 set tabstop=4
 au FileType python setlocal ts=8 et sw=4 sts=4
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 set mouse=a
 " let g:Powerline_symbols = 'unicode'
 
+
+
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
 "set hidden
 
 "Window Splits
@@ -185,6 +192,8 @@ set viminfo='1000,f1
 set foldmethod=syntax
 nnoremap Q <nop>
 
+"R plugin
+let r_syntax_folding = 1
 
 "GUI stuff
 " set guifont=SourceCodePro-Light:h15
@@ -269,4 +278,4 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 " autocmd vimenter * if !argc() | NERDTree | endif
 " autocmd vimenter * if !argc() | CommandT | endif
 
-so ~/.vim/neocompl.vim
+" so ~/.vim/neocompl.vim
