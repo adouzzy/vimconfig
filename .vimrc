@@ -1,3 +1,6 @@
+" vim:fdm=marker
+
+" Bundle {{{
 set nocompatible              " be iMproved
 filetype off                  " required!
 set rtp+=~/.vim/Bundle/vundle/
@@ -13,7 +16,6 @@ Bundle 'bling/vim-airline'
 Bundle 'edkolev/tmuxline.vim'
 "language support
 Bundle 'jcfaria/vim-r-plugin'
-" Bundle 'JuliaLang/julia-vim'
 " Bundle 'davidhalter/jedi-vim'
 " Bundle 'gerw/vim-latex-suite'
 " Bundle 'jcf/vim-latex'
@@ -30,9 +32,13 @@ Bundle 'lokaltog/vim-easymotion'
 " ide stuff
 Bundle 'kien/ctrlp.vim'
 Bundle 'jazzcore/ctrlp-cmatcher'
+Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-repeat'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'majutsushi/tagbar'
 Bundle 'tomtom/tcomment_vim'
+Bundle 'junegunn/vim-easy-align'
+" Bundle 'wincent/Command-T'
 " Bundle 'tpope/vim-commentary'
 "" ORG MODE
 " Bundle 'jceb/vim-orgmode'
@@ -47,23 +53,20 @@ Bundle 'honza/vim-snippets'
 Bundle 'Valloric/YouCompleteMe'
 " Bundle 'Shougo/neocomplete.vim'
 
-" Bundle 'scrooloose/syntastic'
+Bundle 'scrooloose/syntastic'
 
 "remote editing
 " Bundle 'eiginn/netrw'
 " Bundle 'tpope/vim-fugitive'
 " Bundle 'tpope/vim-vinegar'
 
-
-
 filetype plugin indent on
 syntax on
+"}}}
+" General Settings {{{
 set sw=4
 set vb
-nmap <Space> <Plug>(easymotion-bd-w)
-noremap <M-Space> <Plug>(easymotion-bd-f)
-" map <Leader>e <Plug>(easymotion-prefix)
-" set autoindent
+set autoindent
 "fast reponse
 set nolazyredraw
 " set nofsync
@@ -72,13 +75,24 @@ au FileType python setlocal ts=8 et sw=4 sts=4
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 set mouse=a
 " let g:Powerline_symbols = 'unicode'
+set foldlevelstart=2
+set foldlevel=2
+
+set omnifunc=syntaxcomplete#Complete
+set backspace =2 
+set laststatus =2
+set viminfo='1000,f1
+set foldmethod=syntax
+nnoremap Q <nop>
+
 
 
 
 set backupdir=~/.vim/backup//
-set directory=~/.vim/swap//
-set undodir=~/.vim/undo//
-"set hidden
+set backup 
+" set directory=~/.vim/swap//
+" set undodir=~/.vim/undo//
+" "set hidden
 
 "Window Splits
 " imap <c-j> <c-w>j
@@ -88,7 +102,6 @@ set undodir=~/.vim/undo//
 
 
 "Easymotion default leader
-" let g:EasyMotion_leader_key = '<Leader>'
 set whichwrap+=<,>,h,l,[,]
 " set background=dark
 " colorscheme solarized
@@ -99,8 +112,10 @@ colorscheme molokai
 hi IndentGuidesOdd  ctermbg=234
 hi IndentGuidesEven ctermbg=236
 
-
-
+"}}}
+" Key configs{{{
+nmap <Space> <Plug>(easymotion-bd-w)
+noremap <M-Space> <Plug>(easymotion-bd-f)
 
 "Snipets
 let g:UltiSnipsExpandTrigger="<c-l>"
@@ -117,18 +132,58 @@ nmap <leader>pd {v}:ScreenSend<cr>}<Down>
 " let g:ScreenShellHeight=0 
 
 nmap [p {v}:ScreenSend<cr>}<Down>
-
-" Latex vim latex
-let g:tex_flavor='latex'
-let g:Tex_ViewRule_pdf='Skim'
+"Latex
 nmap <silent><leader>pp :w<CR><leader>ll<CR>
 imap <silent><F3> <Esc>:w<CR><leader>ll<CR>
 map <silent><F3> :w<CR><leader>ll<CR>
-
 "NerdTree
 nmap <silent><F2> :NERDTreeToggle<CR>
 imap <silent><F2> <Esc>:NERDTreeToggle<CR>
+"CtrlP
+nmap <silent><leader>r :CtrlPMRUFiles<CR>
+nmap <C-t> :CtrlPBufTagAll<CR>
+nmap <C-e> :!ctags *<CR>:CtrlPTag<CR>
+"alignment 
+vmap <Enter> <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
+"Zenmode
+nnoremap <Leader>z :Goyo<CR>
+" tagbar
+nmap <F8> :TagbarToggle<CR>
+"Tab manipulations
+inoremap <D-1> <ESC>1gt
+nnoremap <D-1> 1gt
+inoremap <D-2> <ESC>2gt
+nnoremap <D-2> 2gt
+inoremap <D-3> <ESC>3gt
+nnoremap <D-3> 3gt
+inoremap <D-4> <ESC>4gt
+nnoremap <D-4> 4gt
+inoremap <C-1> <ESC>1gt
+nnoremap ,1 1gt
+nnoremap ,2 2gt
+nnoremap ,3 3gt
+nnoremap ,4 4gt
+nnoremap ,t :tabnew<cr>
+inoremap <C-Tab> <ESC>:tabn<cr>
+nnoremap <C-Tab> :tabn<cr>
+inoremap <C-S-Tab> <ESC>:tabp<cr>
+nnoremap <C-S-Tab> :tabp<cr>
 
+"best shortcut ever
+nnoremap ; :
+
+
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+"}}}
+" Addon Config {{{
+" Latex vim latex
+let g:tex_flavor='latex'
+let g:Tex_ViewRule_pdf='Skim'
+let g:Tex_CompileRule_pdf='rubber -dq $*'
+let g:Tex_IgnoreLevel=0
+let g:Tex_GotoError=0
+"NerdTree
 " let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
 " let tlist_make_settings  = 'make;m:makros;t:targets'
 
@@ -157,14 +212,10 @@ if executable('ag')
 	"ag is fast enough that CtrlP doesn't need to cache
 	let g:ctrlp_use_caching = 0
 endif
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 "ctrlP
 "
 " nmap <silent><leader>t :CtrlPBufTagAll<CR>
-nmap <silent><leader>r :CtrlPMRUFiles<CR>
-nmap <C-T> :CtrlPBufTagAll<CR>
-nmap <C-E> :!ctags *<CR>:CtrlPTag<CR>
 let g:ctrlp_match_func = {'match':'matcher#cmatch'}
 let g:ctrlp_buftag_types={
 			\'tex':'',
@@ -175,22 +226,6 @@ let g:ctrlp_buftag_types={
 " \	} ,
 
 
-" tagbar
-nmap <F8> :TagbarToggle<CR>
-
-
-"cursor in Macos
-" let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-" let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-set foldlevelstart=2
-set foldlevel=2
-
-set omnifunc=syntaxcomplete#Complete
-set backspace =2 
-set laststatus =2
-set viminfo='1000,f1
-set foldmethod=syntax
-nnoremap Q <nop>
 
 "R plugin
 let r_syntax_folding = 1
@@ -202,26 +237,6 @@ set guifont=FantasqueSansMono-Regular:h18
 set columns=80
 set linespace=3
 set linebreak
-inoremap <D-1> <ESC>1gt
-nnoremap <D-1> 1gt
-inoremap <D-2> <ESC>2gt
-nnoremap <D-2> 2gt
-inoremap <D-3> <ESC>3gt
-nnoremap <D-3> 3gt
-inoremap <D-4> <ESC>4gt
-nnoremap <D-4> 4gt
-inoremap <C-1> <ESC>1gt
-nnoremap ,1 1gt
-nnoremap ,2 2gt
-nnoremap ,3 3gt
-nnoremap ,4 4gt
-nnoremap ,t :tabnew<cr>
-nnoremap ; :
-
-inoremap <C-Tab> <ESC>:tabn<cr>
-nnoremap <C-Tab> :tabn<cr>
-inoremap <C-S-Tab> <ESC>:tabp<cr>
-nnoremap <C-S-Tab> :tabp<cr>
 set go=egmL
 
 "netrw 
@@ -253,7 +268,7 @@ function! ToggleVExplorer()
 		let t:expl_buf_num = bufnr("%")
 	endif
 endfunction
-map <silent> <C-E> :call ToggleVExplorer()<CR>
+" map <silent> <C-w> :call ToggleVExplorer()<CR>
 " Hit enter in the file browser to open the selected
 " file with :vsplit to the right of the browser.
 let g:netrw_browse_split = 4
@@ -266,16 +281,16 @@ let g:netrw_liststyle=3
 set autochdir
 
 "Zen mode
-nnoremap <Leader>z :Goyo<CR>
 let g:goyo_margin_top=2
 let g:goyo_margin_bottom=0
 
 "Disable auto comment
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+
 " set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.aux,*.toc,*.pdfsync,*.pyc,*.gz,*.bbl
 
 " autocmd vimenter * if !argc() | NERDTree | endif
 " autocmd vimenter * if !argc() | CommandT | endif
-
 " so ~/.vim/neocompl.vim
+"}}}
