@@ -3,8 +3,7 @@
 " Bundle {{{
 set nocompatible              " be iMproved
 filetype off                  " required!
-set rtp+=~/.vim/Bundle/vundle/
-set rtp+=/usr/local/Cellar/fzf/0.8.5
+set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 "=======================================
 ""vundle
@@ -13,7 +12,7 @@ Bundle 'gmarik/vundle'
 "=======================================
 "ui related
 "=======================================
-Bundle 'tomasr/molokai'
+"Bundle 'tomasr/molokai'
 Bundle 'junegunn/goyo.vim'
 " Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'bling/vim-airline'
@@ -42,8 +41,7 @@ Bundle 'lokaltog/vim-easymotion'
 " ide stuff
 "=======================================
 Bundle 'Chiel92/vim-autoformat'
-Bundle 'ardagnir/pterosaur'
-Bundle 'wincent/Command-T'
+" Bundle 'wincent/Command-T'
 Bundle 'gcmt/tube.vim'
 Bundle 'rizzatti/dash.vim'
 Bundle 'kien/ctrlp.vim'
@@ -52,7 +50,7 @@ Bundle 'jazzcore/ctrlp-cmatcher'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-repeat'
 Bundle 'terryma/vim-multiple-cursors'
-Bundle 'majutsushi/tagbar'
+" Bundle 'majutsushi/tagbar'
 Bundle 'tomtom/tcomment_vim'
 Bundle 'junegunn/vim-easy-align'
 "=======================================
@@ -78,6 +76,7 @@ Bundle 'Valloric/YouCompleteMe'
 Bundle 'scrooloose/syntastic'
 " Bundle 'DamienCassou/texlint'
 Bundle 'tpope/vim-fugitive'
+Bundle 'airblade/vim-gitgutter'
 
 filetype plugin indent on
 syntax on
@@ -93,12 +92,11 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.aux,*.toc,*.pdfsync,*.pyc,*.gz,*.
 set t_Co=256
 
 set sw=4
-set vb
 set autoindent
 set si "smart indent
 set wrap "wrap lines
 "fast reponse
-set nolazyredraw
+" set nolazyredraw
 " set nofsync
 set tabstop=4
 set expandtab
@@ -120,10 +118,9 @@ set foldmethod=syntax
 
 
 set backupdir=~/.vim/backup,.,/tmp
-set directory=./.vim/swap,.,/tmp
-
-set backup 
- set undodir=~/.vim/undo//
+set directory=./.vim/swp,.,/tmp
+set undofile
+set undodir=~/.vim/undo
 " "set hidden
 
 set whichwrap+=<,>,h,l,[,]
@@ -180,14 +177,6 @@ nmap [o :TubeFocus<cr>
 " nmap <C-c><C-c> :ScreenShell<cr>
 " nmap <leader>pd {v}:ScreenSend<cr>}<Down>
 " " let g:ScreenShellHeight=0 
-
-"Latex
-" nmap <silent><leader>pp :w<CR><leader>ll<CR>
-" imap <silent><F3> <Esc>:w<CR><leader>ll<CR>
-nmap <silent><F3> :w<CR>:!rubberme&<CR><CR>
-imap <silent><F3> <Esc>:w<CR>:!rubberme&<CR><CR>
-nmap <silent><F4> :!openpdfme<CR><CR>
-
 "NerdTree
 nmap <silent><F2> :NERDTreeToggle<CR>
 imap <silent><F2> <Esc>:NERDTreeToggle<CR>
@@ -254,11 +243,37 @@ map <Leader>k <Plug>(easymotion-k)
 let g:EasyMotion_smartcase = 1
 
 " Latex vim latex
-let g:tex_flavor='latex'
-let g:Tex_ViewRule_pdf='Skim'
-let g:Tex_CompileRule_pdf='&& rubber -dq $*'
-let g:Tex_IgnoreLevel=0
-let g:Tex_GotoError=0
+
+set lazyredraw
+set ttyfast
+set novb
+if has ("gui_running")
+    if has ("gui_macvim")
+        let g:tex_flavor='latex'
+        let g:Tex_ViewRule_pdf='Skim'
+        let g:Tex_CompileRule_pdf='&& rubber -dq $*'
+        let g:Tex_IgnoreLevel=0
+        let g:Tex_GotoError=0
+        nmap <silent><F4> :!openpdftex<CR><CR>
+    elseif has("gui_gtk2")
+        let g:tex_flavor='latex'
+        let g:Tex_ViewRule_pdf='evince'
+        let g:Tex_CompileRule_pdf='&& rubber -dq $*'
+        let g:Tex_CompileRule_dvi='latex -interaction=nonstopmode --src-specials $*'
+        let g:Tex_IgnoreLevel=0
+        let g:Tex_GotoError=0
+        nmap <silent><F4> :!openpdftex<CR><CR>
+    endif
+endif
+
+"Latex
+" nmap <silent><leader>pp :w<CR><leader>ll<CR>
+" imap <silent><F3> <Esc>:w<CR><leader>ll<CR>
+nmap <silent><F3> :w<CR>:!rubberme&<CR><CR>
+imap <silent><F3> <Esc>:w<CR>:!rubberme&<CR><CR>
+
+
+
 "NerdTree
 " let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
 " let tlist_make_settings  = 'make;m:makros;t:targets'
@@ -296,6 +311,7 @@ let g:ctrlp_max_files = 500
 let g:ctrlp_max_depth = 4
 " nmap <silent><leader>t :CtrlPBufTagAll<CR>
 let g:ctrlp_match_func = {'match':'matcher#cmatch'}
+let g:ctrlp_open_new_file='t'
 let g:ctrlp_buftag_types={
 			\'tex':'',
 			\'r':'',
@@ -313,11 +329,20 @@ let r_syntax_folding = 1
 " set guifont=SourceCodePro-Light:h15
 " set guifont=FantasqueSansMono-RegItalic:h18
 " set guifont=FantasqueSansMono-Regular:h18
-set guifont=Hermit-light:h18
-set columns=80
-set linespace=0
+if has ("gui_running")
+    if has ("gui_macvim")
+        set guifont=Hermit-light:h18
+        set linespace=0
+    elseif has("gui_gtk2")
+        set guifont=Hermit\ Medium\ 13
+        set guifont=Hermit\ Light\ 15
+        set linespace=-2
+    endif
+endif
+
+set columns=72
 set linebreak
-set go=egmL
+set go=egL
 
 "netrw 
 let g:netrw_altv          = 1
@@ -362,12 +387,13 @@ set autochdir
 
 "Zen mode
 let g:goyo_margin_top=2
+let g:goyo_width=74
 let g:goyo_margin_bottom=0
 
 
 "command-t
 " let g:CommandTFileScanner = 'find'
-let g:CommandTMinHeight = 20
+" let g:CommandTMinHeight = 20
 
 "Disable auto comment
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
