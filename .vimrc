@@ -13,6 +13,7 @@ Bundle 'gmarik/vundle'
 "ui related
 "=======================================
 "Bundle 'tomasr/molokai'
+Bundle 'junegunn/limelight.vim'
 Bundle 'junegunn/goyo.vim'
 " Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'bling/vim-airline'
@@ -42,7 +43,7 @@ Bundle 'lokaltog/vim-easymotion'
 "=======================================
 Bundle 'Chiel92/vim-autoformat'
 " Bundle 'wincent/Command-T'
-Bundle 'gcmt/tube.vim'
+" Bundle 'gcmt/tube.vim'
 Bundle 'rizzatti/dash.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'rking/ag.vim'
@@ -86,6 +87,8 @@ set autoread
 set hlsearch
 set noerrorbells
 set novisualbell
+set lazyredraw
+set ttyfast
 
 set wildmenu
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.o,*.aux,*.toc,*.pdfsync,*.pyc,*.gz,*.bbl,*.so
@@ -163,21 +166,27 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 "tube
+if has ("gui_macvim")
+    let g:tube_terminal = 'iterm'
+    nmap <C-c><C-c> :Tube<cr>
+    nmap <leader>pd {v}:Tube@<cr>}<Down>
+    nmap [p {v}k$:Tube@<cr>}<Down>
+    nmap [o :TubeFocus<cr>
+else
+    "screen
+    let g:ScreenImpl ='GnuScreen'
+    " let g:ScreenImpl = 'Tmux'
+    let g:ScreenShellExternal=1
+    " let g:ScreenShellTerminal='iTerm2.app'
+    " let g:ScreenShellTerminal='/Applications/iTerm.app/Contents/MacOS/iTerm'
+    let g:ScreenShellTerminal='terminator'
+    nmap <C-c><C-c> :ScreenShell<cr>
+    nmap <leader>pd {v}:ScreenSend<cr>}<Down>
+    nmap [p {v}k$:ScreenSend<cr>}<Down>
+    " let g:ScreenShellHeight=0 
+endif
 
-let g:tube_terminal = 'iterm'
-nmap <C-c><C-c> :Tube<cr>
-nmap <leader>pd {v}:Tube@<cr>}<Down>
-nmap [p {v}:Tube@<cr>}<Down>
-nmap [o :TubeFocus<cr>
-" "screen
-" let g:ScreenImpl ='GnuScreen'
-" let g:ScreenShellExternal=1
-" let g:ScreenShellTerminal='iTerm2.app'
-" " let g:ScreenShellTerminal='/Applications/iTerm.app/Contents/MacOS/iTerm'
-" nmap <C-c><C-c> :ScreenShell<cr>
-" nmap <leader>pd {v}:ScreenSend<cr>}<Down>
-" " let g:ScreenShellHeight=0 
-"NerdTree
+" NerdTree
 nmap <silent><F2> :NERDTreeToggle<CR>
 imap <silent><F2> <Esc>:NERDTreeToggle<CR>
 nmap <silent><F10> :VoomToggle<CR>
@@ -244,25 +253,19 @@ let g:EasyMotion_smartcase = 1
 
 " Latex vim latex
 
-set lazyredraw
-set ttyfast
-set novb
+nmap <silent><F4> :!openpdftex<CR><CR>
+let g:tex_flavor='latex'
+let g:Tex_IgnoreLevel=0
+let g:Tex_GotoError=0
 if has ("gui_running")
     if has ("gui_macvim")
-        let g:tex_flavor='latex'
         let g:Tex_ViewRule_pdf='Skim'
         let g:Tex_CompileRule_pdf='&& rubber -dq $*'
-        let g:Tex_IgnoreLevel=0
-        let g:Tex_GotoError=0
-        nmap <silent><F4> :!openpdftex<CR><CR>
     elseif has("gui_gtk2")
         let g:tex_flavor='latex'
         let g:Tex_ViewRule_pdf='evince'
         let g:Tex_CompileRule_pdf='&& rubber -dq $*'
         let g:Tex_CompileRule_dvi='latex -interaction=nonstopmode --src-specials $*'
-        let g:Tex_IgnoreLevel=0
-        let g:Tex_GotoError=0
-        nmap <silent><F4> :!openpdftex<CR><CR>
     endif
 endif
 
@@ -271,6 +274,8 @@ endif
 " imap <silent><F3> <Esc>:w<CR><leader>ll<CR>
 nmap <silent><F3> :w<CR>:!rubberme&<CR><CR>
 imap <silent><F3> <Esc>:w<CR>:!rubberme&<CR><CR>
+imap <silent><F6> <Esc>:GitGutterToggle<CR>
+nmap <silent><F6> :GitGutterToggle<CR>
 
 
 
@@ -389,7 +394,25 @@ set autochdir
 let g:goyo_margin_top=2
 let g:goyo_width=74
 let g:goyo_margin_bottom=0
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
 
+" Color name (:help gui-colors) or RGB color
+let g:limelight_conceal_guifg = 'DarkGray'
+let g:limelight_conceal_guifg = '#777777'
+
+" Default: 0.5
+let g:limelight_default_coefficient = 0.7
+function! GoyoBefore()
+    Limelight
+endfunction
+
+function! GoyoAfter()
+    Limelight!
+endfunction
+
+let g:goyo_callbacks = [function('GoyoBefore'), function('GoyoAfter')]
 
 "command-t
 " let g:CommandTFileScanner = 'find'
