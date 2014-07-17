@@ -3,12 +3,12 @@
 " Bundle {{{
 set nocompatible              " be iMproved
 filetype off                  " required!
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 "=======================================
 ""vundle
 "=======================================
-Bundle 'gmarik/vundle'
+Bundle 'gmarik/Vundle.vim'
 "=======================================
 "ui related
 "=======================================
@@ -44,7 +44,7 @@ Bundle 'lokaltog/vim-easymotion'
 Bundle 'Chiel92/vim-autoformat'
 " Bundle 'wincent/Command-T'
 " Bundle 'gcmt/tube.vim'
-Bundle 'rizzatti/dash.vim'
+" Bundle 'rizzatti/dash.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'rking/ag.vim'
 Bundle 'jazzcore/ctrlp-cmatcher'
@@ -78,7 +78,7 @@ Bundle 'scrooloose/syntastic'
 " Bundle 'DamienCassou/texlint'
 Bundle 'tpope/vim-fugitive'
 Bundle 'airblade/vim-gitgutter'
-
+call vundle#end()
 filetype plugin indent on
 syntax on
 "}}}
@@ -290,6 +290,7 @@ let g:airline_left_sep = '▶'
 let g:airline_right_sep = '«'
 let g:airline_right_sep = '◀'
 let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
 let g:tmuxline_powerline_separators = 0
 let g:tmuxline_separators = {
 			\ 'left' : '',
