@@ -1,4 +1,4 @@
 bundle/*
-/* backup/* */
-/* swp/* */
-/* undo/* */
+backup/*
+swp/*
+undo/*
