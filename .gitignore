@@ -1,0 +1,23 @@
+#Latex related files#
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.snm
+*.swp
+*.DS_Store
+*.pdfsync
+*.dvi
+*.nav
+*.dtx
+*.ins
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.fmt
+*.lof
+*.lot
+*.pyc
+*.o
