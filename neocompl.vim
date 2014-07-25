@@ -55,7 +55,7 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 "let g:neocomplete#enable_insert_char_pre = 1
 
 " AutoComplPop like behavior.
-"let g:neocomplete#enable_auto_select = 1
+" let g:neocomplete#enable_auto_select = 0
 
 " Shell like behavior(not recommended).
 "set completeopt+=longest
@@ -81,3 +81,12 @@ endif
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+
+
+"custom
+let g:neocomplete#max_list = 20
+let g:neocomplete#auto_completion_start_length = 4
+let g:neocomplete#manual_completion_start_length = 1
+" let g:neocomplete#
+
