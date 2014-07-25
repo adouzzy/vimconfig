@@ -1,6 +1,6 @@
 " vim:fdm=marker
 
-" Bundle {{{
+" Plugin {{{
 set nocompatible              " be iMproved
 filetype off                  " required!
 set rtp+=~/.vim/bundle/Vundle.vim/
@@ -8,78 +8,75 @@ call vundle#begin()
 "=======================================
 ""vundle
 "=======================================
-Bundle 'gmarik/Vundle.vim'
+Plugin 'gmarik/Vundle.vim'
 "=======================================
 "ui related
 "=======================================
-"Bundle 'tomasr/molokai'
-Bundle 'junegunn/limelight.vim'
-Bundle 'junegunn/goyo.vim'
-" Bundle 'nathanaelkane/vim-indent-guides'
-" Bundle 'bling/vim-airline'
-Bundle 'itchyny/lightline.vim'
-Bundle 'edkolev/tmuxline.vim'
+"Plugin 'tomasr/molokai'
+" Plugin 'junegunn/limelight.vim'
+Plugin 'junegunn/goyo.vim'
+" Plugin 'nathanaelkane/vim-indent-guides'
+" Plugin 'bling/vim-airline'
+Plugin 'itchyny/lightline.vim'
+Plugin 'edkolev/tmuxline.vim'
 "=======================================
 "language support
 "=======================================
-Bundle 'jcfaria/vim-r-plugin'
-" Bundle 'davidhalter/jedi-vim'
-" Bundle 'gerw/vim-latex-suite'
-" Bundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
-Bundle 'jcf/vim-latex'
-Bundle 'latex-box-team/latex-box'
+Plugin 'jcfaria/vim-r-plugin'
+" Plugin 'davidhalter/jedi-vim'
+" Plugin 'gerw/vim-latex-suite'
+" Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
+Plugin 'jcf/vim-latex'
+" Plugin 'latex-box-team/latex-box'
 
 "=======================================
 "window managment
 "=======================================
-" Bundle 'ervandew/screen'
-Bundle 'christoomey/vim-tmux-navigator'
-" Bundle 'ervandew/supertab'
+" Plugin 'ervandew/screen'
+Plugin 'christoomey/vim-tmux-navigator'
 "=======================================
 " move around
 "=======================================
-Bundle 'lokaltog/vim-easymotion'
+Plugin 'lokaltog/vim-easymotion'
 "=======================================
 " ide stuff
 "=======================================
-Bundle 'tpope/vim-tbone'
-Bundle 'Chiel92/vim-autoformat'
-" Bundle 'wincent/Command-T'
-" Bundle 'gcmt/tube.vim'
-" Bundle 'rizzatti/dash.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'rking/ag.vim'
-Bundle 'jazzcore/ctrlp-cmatcher'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-repeat'
-Bundle 'terryma/vim-multiple-cursors'
-" Bundle 'majutsushi/tagbar'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'junegunn/vim-easy-align'
+Plugin 'tpope/vim-tbone'
+Plugin 'Chiel92/vim-autoformat'
+Plugin 'kien/ctrlp.vim'
+Plugin 'rking/ag.vim'
+Plugin 'jazzcore/ctrlp-cmatcher'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-repeat'
+Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'majutsushi/tagbar'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'junegunn/vim-easy-align'
 "=======================================
 "" ORG MODE
 "=======================================
-" Bundle 'vim-voom/VOoM'
-" Bundle 'jceb/vim-orgmode'
-" Bundle 'mattn/calendar-vim'
-Bundle 'tpope/vim-speeddating'
-" Bundle 'xolox/vim-notes'
-" Bundle 'xolox/vim-misc'
-Bundle 'adouzzy/workflowish'
+" Plugin 'vim-voom/VOoM'
+" Plugin 'jceb/vim-orgmode'
+" Plugin 'mattn/calendar-vim'
+Plugin 'tpope/vim-speeddating'
+" Plugin 'xolox/vim-notes'
+" Plugin 'xolox/vim-misc'
+Plugin 'adouzzy/workflowish'
 
 "=======================================
 ""Snips
 "=======================================
-Bundle 'scrooloose/nerdtree'
-Bundle 'SirVer/ultisnips'
-Bundle 'honza/vim-snippets'
-Bundle 'Valloric/YouCompleteMe'
-" Bundle 'Shougo/neocomplete.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'ervandew/supertab'
+Plugin 'Shougo/neocomplete.vim'
 
-Bundle 'scrooloose/syntastic'
-" Bundle 'DamienCassou/texlint'
-Bundle 'tpope/vim-fugitive'
-Bundle 'airblade/vim-gitgutter'
+Plugin 'scrooloose/syntastic'
+" Plugin 'DamienCassou/texlint'
+Plugin 'tpope/vim-fugitive'
+" Plugin 'airblade/vim-gitgutter'
 call vundle#end()
 filetype plugin indent on
 syntax on
@@ -133,8 +130,8 @@ set whichwrap+=<,>,h,l,[,]
 " colorscheme solarized
 " let g:molokai_original = 1
 " let g:rehash256 = 1
-colorscheme molokai_old
-" colorscheme jellybeans
+" colorscheme molokai_old
+colorscheme jellybeans
 " set background=dark
 hi IndentGuidesOdd  ctermbg=234
 hi IndentGuidesEven ctermbg=236
@@ -245,8 +242,8 @@ let g:EasyMotion_keys = 'fdsartewqbnvmcyuiop;lkj'
 nmap <Space> <Plug>(easymotion-bd-w)
 noremap <M-Space> <Plug>(easymotion-bd-f)
 " let g:EasyMotion_do_shade = 1
-nmap s <Plug>(easymotion-s2)
-nmap t <Plug>(easymotion-t2)
+nmap s <Plug>(easymotion-s)
+nmap t <Plug>(easymotion-t)
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
@@ -279,7 +276,7 @@ nmap <silent><F3> :w<CR>:!rubberme&<CR><CR>
 imap <silent><F3> <Esc>:w<CR>:!rubberme&<CR><CR>
 imap <silent><F6> <Esc>:GitGutterToggle<CR>
 nmap <silent><F6> :GitGutterToggle<CR>
-
+imap <buffer> ]] <Plug>LatexCloseCurEnv
 
 
 "NerdTree
@@ -287,11 +284,20 @@ nmap <silent><F6> :GitGutterToggle<CR>
 " let tlist_make_settings  = 'make;m:makros;t:targets'
 
 "lightline
-            let g:lightline= {
-                        \ 'colorscheme' : 'jellybeans'
-                        \}
+let g:lightline= {
+            \ 'colorscheme' : 'jellybeans'
+            \}
 "Tmux line
 let g:tmuxline_preset = 'full'
+" let g:tmuxline_preset = {
+"       \'a'    : '#S',
+"       \'b'    : '#W',
+"       \'c'    : '#H',
+"       \'win'  : '#I #W',
+"       \'cwin' : '#I #W',
+"       \'x'    : '%a',
+"       \'y'    : '#W %R',
+"       \'z'    : '#H'}
 
 "Air line
 " let g:airline#extensions#tabline#enabled =1
@@ -328,9 +334,9 @@ let g:ctrlp_max_depth = 4
 let g:ctrlp_match_func = {'match':'matcher#cmatch'}
 let g:ctrlp_open_new_file='t'
 let g:ctrlp_buftag_types={
-			\'tex':'',
-			\'r':'',
-			\}
+            \'tex':'',
+            \'r':'',
+            \}
 " \ 'Splus':{
 " \	'bin':'ctags',
 " \	} ,
@@ -371,22 +377,22 @@ let g:netrw_special_syntax= 1
 
 " Toggle Vexplore with Ctrl-E
 function! ToggleVExplorer()
-	if exists("t:expl_buf_num")
-		let expl_win_num = bufwinnr(t:expl_buf_num)
-		if expl_win_num != -1
-			let cur_win_nr = winnr()
-			exec expl_win_num . 'wincmd w'
-			close
-			exec cur_win_nr . 'wincmd w'
-			unlet t:expl_buf_num
-		else
-			unlet t:expl_buf_num
-		endif
-	else
-		exec '1wincmd w'
-		Vexplore
-		let t:expl_buf_num = bufnr("%")
-	endif
+    if exists("t:expl_buf_num")
+        let expl_win_num = bufwinnr(t:expl_buf_num)
+        if expl_win_num != -1
+            let cur_win_nr = winnr()
+            exec expl_win_num . 'wincmd w'
+            close
+            exec cur_win_nr . 'wincmd w'
+            unlet t:expl_buf_num
+        else
+            unlet t:expl_buf_num
+        endif
+    else
+        exec '1wincmd w'
+        Vexplore
+        let t:expl_buf_num = bufnr("%")
+    endif
 endfunction
 " map <silent> <C-w> :call ToggleVExplorer()<CR>
 " Hit enter in the file browser to open the selected
@@ -405,25 +411,21 @@ let g:goyo_margin_top=2
 let g:goyo_width=74
 let g:goyo_margin_bottom=0
 " Color name (:help cterm-colors) or ANSI code
-let g:limelight_conceal_ctermfg = 'gray'
-let g:limelight_conceal_ctermfg = 240
-
+" let g:limelight_conceal_ctermfg = 'gray'
+" let g:limelight_conceal_ctermfg = 240
 " Color name (:help gui-colors) or RGB color
-let g:limelight_conceal_guifg = 'DarkGray'
-let g:limelight_conceal_guifg = '#777777'
-
-" Default: 0.5
-let g:limelight_default_coefficient = 0.7
-function! GoyoBefore()
-    Limelight
-endfunction
-
-function! GoyoAfter()
-    Limelight!
-endfunction
-
-let g:goyo_callbacks = [function('GoyoBefore'), function('GoyoAfter')]
-
+" let g:limelight_conceal_guifg = 'DarkGray'
+" let g:limelight_conceal_guifg = '#777777'
+" " Default: 0.5
+" let g:limelight_default_coefficient = 0.7
+" function! GoyoBefore()
+"     Limelight
+" endfunction
+" function! GoyoAfter()
+"     Limelight!
+" endfunction
+" let g:goyo_callbacks = [function('GoyoBefore'), function('GoyoAfter')]
+"
 "command-t
 " let g:CommandTFileScanner = 'find'
 " let g:CommandTMinHeight = 20
@@ -442,6 +444,49 @@ let g:org_heading_highlight_colors = ['Title']
 
 " autocmd vimenter * if !argc() | NERDTree | endif
 " autocmd vimenter * if !argc() | CommandT | endif
-" so ~/.vim/neocompl.vim
+so ~/.vim/neocompl.vim
 "}}}
 
+" Tell vim to remember certain things when we exit
+"  '10  :  marks will be remembered for up to 10 previously edited files
+"  "100 :  will save up to 100 lines for each register
+"  :20  :  up to 20 lines of command-line history will be remembered
+"  %    :  saves and restores the buffer list
+"  n... :  where to save the viminfo files
+set viminfo='10,\"100,:20,%,n~/.viminfo
+
+function! ResCur()
+    if line("'\"") <= line("$")
+        normal! g`"
+        return 1
+    endif
+endfunction
+if has("folding")
+    function! UnfoldCur()
+        if !&foldenable
+            return
+        endif
+        let cl = line(".")
+        if cl <= 1
+            return
+        endif
+        let cf  = foldlevel(cl)
+        let uf  = foldlevel(cl - 1)
+        let min = (cf > uf ? uf : cf)
+        if min
+            execute "normal!" min . "zo"
+            return 1
+        endif
+    endfunction
+endif
+augroup resCur
+    autocmd!
+    if has("folding")
+        autocmd BufWinEnter * if ResCur() | call UnfoldCur() | endif
+    else
+        autocmd BufWinEnter * call ResCur()
+    endif
+augroup END
+
+
+let g:ycm_min_num_of_chars_for_completion = 5
