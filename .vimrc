@@ -3,12 +3,12 @@
 " Bundle {{{
 set nocompatible              " be iMproved
 filetype off                  " required!
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 "=======================================
 ""vundle
 "=======================================
-Bundle 'gmarik/vundle'
+Bundle 'gmarik/Vundle.vim'
 "=======================================
 "ui related
 "=======================================
@@ -16,7 +16,8 @@ Bundle 'gmarik/vundle'
 Bundle 'junegunn/limelight.vim'
 Bundle 'junegunn/goyo.vim'
 " Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'bling/vim-airline'
+" Bundle 'bling/vim-airline'
+Bundle 'itchyny/lightline.vim'
 Bundle 'edkolev/tmuxline.vim'
 "=======================================
 "language support
@@ -31,7 +32,7 @@ Bundle 'latex-box-team/latex-box'
 "=======================================
 "window managment
 "=======================================
-Bundle 'ervandew/screen'
+" Bundle 'ervandew/screen'
 Bundle 'christoomey/vim-tmux-navigator'
 " Bundle 'ervandew/supertab'
 "=======================================
@@ -41,10 +42,11 @@ Bundle 'lokaltog/vim-easymotion'
 "=======================================
 " ide stuff
 "=======================================
+Bundle 'tpope/vim-tbone'
 Bundle 'Chiel92/vim-autoformat'
 " Bundle 'wincent/Command-T'
 " Bundle 'gcmt/tube.vim'
-Bundle 'rizzatti/dash.vim'
+" Bundle 'rizzatti/dash.vim'
 Bundle 'kien/ctrlp.vim'
 Bundle 'rking/ag.vim'
 Bundle 'jazzcore/ctrlp-cmatcher'
@@ -57,8 +59,8 @@ Bundle 'junegunn/vim-easy-align'
 "=======================================
 "" ORG MODE
 "=======================================
-Bundle 'vim-voom/VOoM'
-Bundle 'jceb/vim-orgmode'
+" Bundle 'vim-voom/VOoM'
+" Bundle 'jceb/vim-orgmode'
 " Bundle 'mattn/calendar-vim'
 Bundle 'tpope/vim-speeddating'
 " Bundle 'xolox/vim-notes'
@@ -78,7 +80,7 @@ Bundle 'scrooloose/syntastic'
 " Bundle 'DamienCassou/texlint'
 Bundle 'tpope/vim-fugitive'
 Bundle 'airblade/vim-gitgutter'
-
+call vundle#end()
 filetype plugin indent on
 syntax on
 "}}}
@@ -131,8 +133,8 @@ set whichwrap+=<,>,h,l,[,]
 " colorscheme solarized
 " let g:molokai_original = 1
 " let g:rehash256 = 1
-" colorscheme molokai_old
-colorscheme jellybeans
+colorscheme molokai_old
+" colorscheme jellybeans
 " set background=dark
 hi IndentGuidesOdd  ctermbg=234
 hi IndentGuidesEven ctermbg=236
@@ -258,6 +260,7 @@ let g:tex_flavor='latex'
 let g:Tex_IgnoreLevel=0
 let g:Tex_GotoError=0
 if has ("gui_running")
+    set t_Co=256
     if has ("gui_macvim")
         let g:Tex_ViewRule_pdf='Skim'
         let g:Tex_CompileRule_pdf='&& rubber -dq $*'
@@ -283,20 +286,27 @@ nmap <silent><F6> :GitGutterToggle<CR>
 " let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
 " let tlist_make_settings  = 'make;m:makros;t:targets'
 
+"lightline
+            let g:lightline= {
+                        \ 'colorscheme' : 'jellybeans'
+                        \}
+"Tmux line
+let g:tmuxline_preset = 'full'
+
 "Air line
 " let g:airline#extensions#tabline#enabled =1
-let g:airline_left_sep = '»'
-let g:airline_left_sep = '▶'
-let g:airline_right_sep = '«'
-let g:airline_right_sep = '◀'
-let g:airline#extensions#whitespace#enabled = 0
-let g:tmuxline_powerline_separators = 0
-let g:tmuxline_separators = {
-			\ 'left' : '',
-			\ 'left_alt': '>',
-			\ 'right' : '',
-			\ 'right_alt' : '<',
-			\ 'space' : ' '}
+" let g:airline_left_sep = '»'
+" let g:airline_left_sep = '▶'
+" let g:airline_right_sep = '«'
+" let g:airline_right_sep = '◀'
+" let g:airline#extensions#whitespace#enabled = 0
+" let g:airline#extensions#tabline#enabled = 1
+" let g:tmuxline_separators = {
+" 			\ 'left' : '',
+" 			\ 'left_alt': '>',
+" 			\ 'right' : '',
+" 			\ 'right_alt' : '<',
+" 			\ 'space' : ' '}
 
 " " The Silver Search
 " if executable('ag')
