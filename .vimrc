@@ -9,6 +9,28 @@ call vundle#begin()
 ""vundle
 "=======================================
 Plugin 'gmarik/Vundle.vim'
+Plugin 'Chiel92/vim-autoformat'
+Plugin 'kien/ctrlp.vim'
+Plugin 'rking/ag.vim'
+Plugin 'jazzcore/ctrlp-cmatcher'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-speeddating'
+" Plugin 'xolox/vim-notes'
+" Plugin 'xolox/vim-misc'
+Plugin 'adouzzy/workflowish'
+" Plugin 'scrooloose/syntastic'
+" Plugin 'Valloric/YouCompleteMe'
+" Plugin 'ervandew/supertab'
+Plugin 'Shougo/neocomplete.vim'
+
+
+
+"=======================================
+"Optional lightweight
+"=======================================
+
+Plugin 'jcfaria/vim-r-plugin'
+Plugin 'christoomey/vim-tmux-navigator'
 "=======================================
 "ui related
 "=======================================
@@ -22,7 +44,6 @@ Plugin 'edkolev/tmuxline.vim'
 "=======================================
 "language support
 "=======================================
-Plugin 'jcfaria/vim-r-plugin'
 " Plugin 'davidhalter/jedi-vim'
 " Plugin 'gerw/vim-latex-suite'
 " Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
@@ -33,7 +54,6 @@ Plugin 'jcf/vim-latex'
 "window managment
 "=======================================
 " Plugin 'ervandew/screen'
-Plugin 'christoomey/vim-tmux-navigator'
 "=======================================
 " move around
 "=======================================
@@ -42,11 +62,6 @@ Plugin 'lokaltog/vim-easymotion'
 " ide stuff
 "=======================================
 Plugin 'tpope/vim-tbone'
-Plugin 'Chiel92/vim-autoformat'
-Plugin 'kien/ctrlp.vim'
-Plugin 'rking/ag.vim'
-Plugin 'jazzcore/ctrlp-cmatcher'
-Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-repeat'
 Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'majutsushi/tagbar'
@@ -58,22 +73,12 @@ Plugin 'junegunn/vim-easy-align'
 " Plugin 'vim-voom/VOoM'
 " Plugin 'jceb/vim-orgmode'
 " Plugin 'mattn/calendar-vim'
-Plugin 'tpope/vim-speeddating'
-" Plugin 'xolox/vim-notes'
-" Plugin 'xolox/vim-misc'
-Plugin 'adouzzy/workflowish'
-
 "=======================================
 ""Snips
 "=======================================
 Plugin 'scrooloose/nerdtree'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
-" Plugin 'Valloric/YouCompleteMe'
-" Plugin 'ervandew/supertab'
-Plugin 'Shougo/neocomplete.vim'
-
-Plugin 'scrooloose/syntastic'
 " Plugin 'DamienCassou/texlint'
 Plugin 'tpope/vim-fugitive'
 " Plugin 'airblade/vim-gitgutter'
@@ -241,7 +246,8 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 let g:EasyMotion_keys = 'fdsartewqbnvmcyuiop;lkj'
 nmap <Space> <Plug>(easymotion-bd-w)
 noremap <M-Space> <Plug>(easymotion-bd-f)
-" let g:EasyMotion_do_shade = 1
+let g:EasyMotion_do_shade = 0
+let g:EasyMotion_do_mapping = 1
 nmap s <Plug>(easymotion-s)
 nmap t <Plug>(easymotion-t)
 " JK motions: Line motions
@@ -249,6 +255,8 @@ map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
 " Turn on case sensitive feature
 let g:EasyMotion_smartcase = 1
+let g:EasyMotion_enter_jump_first = 1
+let g:EasyMotion_space_jump_first = 1
 
 " Latex vim latex
 
@@ -446,6 +454,7 @@ let g:org_heading_highlight_colors = ['Title']
 " autocmd vimenter * if !argc() | CommandT | endif
 so ~/.vim/neocompl.vim
 "}}}
+au FileType tex let g:neocomplete#disable_auto_complete = 1
 
 " Tell vim to remember certain things when we exit
 "  '10  :  marks will be remembered for up to 10 previously edited files
