@@ -58,6 +58,7 @@ Plugin 'jcf/vim-latex'
 " move around
 "=======================================
 Plugin 'lokaltog/vim-easymotion'
+Plugin 'justinmk/vim-sneak'
 "=======================================
 " ide stuff
 "=======================================
@@ -66,7 +67,6 @@ Plugin 'tpope/vim-repeat'
 Plugin 'terryma/vim-multiple-cursors'
 " Plugin 'majutsushi/tagbar'
 Plugin 'tomtom/tcomment_vim'
-Plugin 'junegunn/vim-easy-align'
 "=======================================
 "" ORG MODE
 "=======================================
@@ -241,22 +241,35 @@ nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 
 
 " Addon Config {{{
-" EasyMotion
-" let g:EasyMotion_keys = 'fjdksla;rueiwoqpvncmx'
-let g:EasyMotion_keys = 'fdsartewqbnvmcyuiop;lkj'
-nmap <Space> <Plug>(easymotion-bd-w)
-noremap <M-Space> <Plug>(easymotion-bd-f)
-let g:EasyMotion_do_shade = 0
-let g:EasyMotion_do_mapping = 1
-nmap s <Plug>(easymotion-s)
-nmap t <Plug>(easymotion-t)
-" JK motions: Line motions
-map <Leader>j <Plug>(easymotion-j)
-map <Leader>k <Plug>(easymotion-k)
-" Turn on case sensitive feature
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_enter_jump_first = 1
-let g:EasyMotion_space_jump_first = 1
+" " EasyMotion
+" let g:EasyMotion_keys = 'fdsartewqbnvmcyuiop;lkj'
+" nmap <Space> <Plug>(easymotion-bd-w)
+" noremap <M-Space> <Plug>(easymotion-bd-f)
+" let g:EasyMotion_do_shade = 0
+" let g:EasyMotion_do_mapping = 1
+" nmap s <Plug>(easymotion-s)
+" nmap t <Plug>(easymotion-t)
+" " JK motions: Line motions
+" map <Leader>j <Plug>(easymotion-j)
+" map <Leader>k <Plug>(easymotion-k)
+" " Turn on case sensitive feature
+" let g:EasyMotion_smartcase = 1
+" let g:EasyMotion_enter_jump_first = 1
+" let g:EasyMotion_space_jump_first = 1
+"sneak
+let g:sneak#streak = 1
+let g:sneak#s_next = 1
+" 1-character enhanced 'f'
+nmap f <Plug>Sneak_f
+nmap F <Plug>Sneak_F
+" visual-mode
+xmap f <Plug>Sneak_f
+xmap F <Plug>Sneak_F
+" operator-pending-mode
+omap f <Plug>Sneak_f
+omap F <Plug>Sneak_F
+
+
 
 " Latex vim latex
 
