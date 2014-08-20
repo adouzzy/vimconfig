@@ -1,7 +1,6 @@
 " vim:fdm=marker
 " vim:foldlevel=0
 " vim:foldlevelstart=0
-
 " Vundle  {{{
 set nocompatible              " be iMproved
 filetype off                  " required!
@@ -11,9 +10,13 @@ call vundle#begin()
 ""vundle
 "=======================================
 Plugin 'gmarik/Vundle.vim'
-Plugin 'Chiel92/vim-autoformat'
+Plugin 'chrisbra/Recover.vim'
+" Plugin 'Chiel92/vim-autoformat'
+" Plugin 'Shougo/vimproc.vim'
+" Plugin 'Shougo/neomru.vim'
+" Plugin 'Shougo/unite.vim'
+" Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'rking/ag.vim'
 Plugin 'jazzcore/ctrlp-cmatcher'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-speeddating'
@@ -24,6 +27,7 @@ Plugin 'adouzzy/workflowish'
 " Plugin 'Valloric/YouCompleteMe'
 " Plugin 'ervandew/supertab'
 Plugin 'Shougo/neocomplete.vim'
+" Plugin 'terryma/vim-expand-region'
 "=======================================
 "Optional lightweight
 "=======================================
@@ -46,7 +50,7 @@ Plugin 'edkolev/tmuxline.vim'
 " Plugin 'gerw/vim-latex-suite'
 " Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
 Plugin 'jcf/vim-latex'
-" Plugin 'latex-box-team/latex-box'
+Plugin 'latex-box-team/latex-box'
 
 "=======================================
 "window managment
@@ -62,7 +66,8 @@ Plugin 'justinmk/vim-sneak'
 "=======================================
 Plugin 'tpope/vim-tbone'
 Plugin 'tpope/vim-repeat'
-Plugin 'terryma/vim-multiple-cursors'
+" Plugin 'terryma/vim-multiple-cursors'
+Plugin 'kris89/vim-multiple-cursors'
 " Plugin 'majutsushi/tagbar'
 Plugin 'tomtom/tcomment_vim'
 "=======================================
@@ -87,6 +92,7 @@ syntax on
 " General Settings {{{
 " General {{{
 set autoread
+set autochdir
 set hlsearch
 set noerrorbells
 set novisualbell
@@ -107,6 +113,7 @@ set tabstop=4
 set expandtab
 set smarttab
 au FileType python setlocal ts=8 et sw=4 sts=4
+" let g:pymode_rope=0
 au FileType workflowish setlocal ts=2 et sw=2 sts=2
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 set mouse=a
@@ -121,8 +128,6 @@ set laststatus =2
 let vimrplugin_term = "/Applications/iTerm.app/Contents/MacOS/iTerm"
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 "}}}
-
-
 " tmp directories{{{
 set backupdir=~/.vim/backup,.,/tmp
 set directory=./.vim/swp,.,/tmp
@@ -130,18 +135,22 @@ set undofile
 set undodir=~/.vim/undo
 " "set hidden
 "}}}
-
-" Shortcuts{{{
-nnoremap Q <nop>
-imap jj <Esc>
+"Leader {{{
 let mapleader = ','
 let g:mapleader = ','
 let maplocalleader = '\'
 let g:maplocalleader = '\'
-set shell=/bin/zsh
-noremap <C-s> :sh<cr>
 map <leader>d :bd<cr>
 map <leader>e :tabe<space>
+"}}}
+" Shortcuts{{{
+nnoremap Q <nop>
+imap jj <Esc>
+imap jk <Esc>
+imap kj <Esc>
+
+set shell=/bin/bash
+" noremap <C-s> :sh<cr>
 cnoreabbrev gw Gwrite
 "best shortcut ever
 nnoremap ; :
@@ -153,7 +162,7 @@ vnoremap ; :
 " set guifont=FantasqueSansMono-Regular:h18
 if has ("gui_running")
     if has ("gui_macvim")
-        set guifont=Hermit-light:h18
+        set guifont=Hermit-light:h15
         set linespace=0
     elseif has("gui_gtk2")
         set guifont=Hermit\ Medium\ 13
@@ -161,7 +170,7 @@ if has ("gui_running")
         set linespace=-2
     endif
 endif
-set columns=72
+" set columns=72
 set go=egL
 " set background=dark
 " colorscheme solarized
@@ -175,8 +184,6 @@ hi IndentGuidesEven ctermbg=236
 
 "}}}
 set autochdir
-
-
 " Restore Position {{{
 
 " Tell vim to remember certain things when we exit
@@ -222,6 +229,13 @@ augroup END
 "}}}
 "}}}
 "Plugins {{{
+" "Unite {{{
+" nnoremap <leader>f :Unite -start-insert buffer file<cr>
+" nnoremap <leader>r :Unite -start-insert file_mru<cr>
+" nnoremap <leader>g :<C-u>Unite -start-insert file_rec/async:!<CR>
+" nnoremap <leader>b :Unite buffer<cr>
+"
+" "}}}
 "Snipets {{{
 let g:UltiSnipsExpandTrigger="<c-l>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
@@ -248,16 +262,6 @@ else
     " let g:ScreenShellHeight=0 
 endif
 "}}}
-" NerdTree {{{
-"NerdTree Settings
-let NERDTreeIgnore=['\.o$', '\~$', '\.aux$','\.gz$','\.toc$','\.swp$','\.pdfsync$','\.dtx$','\.bbl$','\.blg$','\.fls$','\.fdb_latexmk','\.latexmain$','\.pyc$']
-nmap <silent><F2> :NERDTreeToggle<CR>
-imap <silent><F2> <Esc>:NERDTreeToggle<CR>
-nmap <silent><F10> :VoomToggle<CR>
-imap <silent><F10> <Esc>:VoomToggle<CR>
-" let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
-" let tlist_make_settings  = 'make;m:makros;t:targets'
-"}}}
 "CtrlP{{{
 nmap <silent><leader>r :CtrlPMRUFiles<CR>
 nmap <C-t> :CtrlPBufTagAll<CR>
@@ -274,13 +278,11 @@ let g:ctrlp_buftag_types={
 " \ 'Splus':{
 " \	'bin':'ctags',
 " \	} ,
-
-
 "}}}
-"alignment {{{
-vmap <Enter> <Plug>(EasyAlign)
-nmap <Leader>a <Plug>(EasyAlign)
-"}}}
+" "alignment {{{
+" vmap <Enter> <Plug>(EasyAlign)
+" nmap <Leader>a <Plug>(EasyAlign)
+" "}}}
 "Goyo Zen mode {{{
 nnoremap <Leader>z :Goyo<CR>
 let g:goyo_margin_top=2
@@ -304,25 +306,12 @@ let g:goyo_margin_bottom=0
 "
 
 "}}}
-" EasyMotion{{{
-" let g:EasyMotion_keys = 'fdsartewqbnvmcyuiop;lkj'
-" nmap <Space> <Plug>(easymotion-bd-w)
-" noremap <M-Space> <Plug>(easymotion-bd-f)
-" let g:EasyMotion_do_shade = 0
-" let g:EasyMotion_do_mapping = 1
-" nmap s <Plug>(easymotion-s)
-" nmap t <Plug>(easymotion-t)
-" " JK motions: Line motions
-" map <Leader>j <Plug>(easymotion-j)
-" map <Leader>k <Plug>(easymotion-k)
-" " Turn on case sensitive feature
-" let g:EasyMotion_smartcase = 1
-" let g:EasyMotion_enter_jump_first = 1
-" let g:EasyMotion_space_jump_first = 1
-"}}}
 "Sneak{{{
-let g:sneak#streak = 1
+set smartcase
+set ignorecase
+let g:sneak#streak = 0
 let g:sneak#s_next = 1
+let g:sneak#use_ic_scs = 1
 " 1-character enhanced 'f'
 nmap f <Plug>Sneak_f
 nmap F <Plug>Sneak_F
@@ -348,11 +337,28 @@ nmap <silent><F4> :!openpdftex<CR><CR>
 let g:tex_flavor='latex'
 let g:Tex_IgnoreLevel=0
 let g:Tex_GotoError=0
+let g:Tex_FoldedEnvironments=',comment'
+let g:Tex_ViewRule_pdf='Skim'
+let g:Tex_CompileRule_pdf='&& rubber -dq $*'
+let g:Tex_DefaultTargetFormat = 'pdf'
+" let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --interaction=nonstopmode $*'
+let g:Tex_ViewRule_pdf = 'Skim'
+let g:Tex_FormatDependency_ps  = 'dvi,ps'
+let g:Tex_FormatDependency_pspdf = 'dvi,ps,pspdf'
+let g:Tex_FormatDependency_dvipdf = 'dvi,dvipdf'
+
 if has ("gui_running")
     set t_Co=256
     if has ("gui_macvim")
         let g:Tex_ViewRule_pdf='Skim'
         let g:Tex_CompileRule_pdf='&& rubber -dq $*'
+        let g:Tex_DefaultTargetFormat = 'pdf'
+        " let g:Tex_CompileRule_pdf = 'pdflatex -synctex=1 --interaction=nonstopmode $*'
+        let g:Tex_ViewRule_pdf = 'Skim'
+        let g:Tex_FormatDependency_ps  = 'dvi,ps'
+        let g:Tex_FormatDependency_pspdf = 'dvi,ps,pspdf'
+        let g:Tex_FormatDependency_dvipdf = 'dvi,dvipdf'
+
     elseif has("gui_gtk2")
         let g:tex_flavor='latex'
         let g:Tex_ViewRule_pdf='evince'
@@ -366,9 +372,10 @@ endif
 " imap <silent><F3> <Esc>:w<CR><leader>ll<CR>
 nmap <silent><F3> :w<CR>:!rubberme&<CR><CR>
 imap <silent><F3> <Esc>:w<CR>:!rubberme&<CR><CR>
-imap <silent><F6> <Esc>:GitGutterToggle<CR>
-nmap <silent><F6> :GitGutterToggle<CR>
+" imap <silent><F6> <Esc>:GitGutterToggle<CR>
+" nmap <silent><F6> :GitGutterToggle<CR>
 imap <buffer> ]] <Plug>LatexCloseCurEnv
+let g:Tex_TreatMacViewerAsUNIX=1
 "}}}
 " Status lines{{{
 "lightline
@@ -405,31 +412,53 @@ let g:tmuxline_preset = 'full'
 "R plugin{{{
 let r_syntax_folding = 1
 "}}}
-"netrw {{{
-let g:netrw_altv          = 1
-let g:netrw_fastbrowse    = 2
-let g:netrw_keepdir       = 0
-let g:netrw_liststyle     = 2
-let g:netrw_retmap        = 1
-let g:netrw_silent        = 1
-let g:netrw_special_syntax= 1
-
-"  Hit enter in the file browser to open the selected
-" file with :vsplit to the right of the browser.
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-
-" Default to tree mode
-let g:netrw_liststyle=3
-"}}}
 " neocompl{{{
 so ~/.vim/neocompl.vim
 au FileType tex let g:neocomplete#disable_auto_complete = 1
+function! Multiple_cursors_before()
+    exe 'NeoCompleteLock'
+    echo 'Disabled autocomplete'
+endfunction
+function! Multiple_cursors_after()
+    exe 'NeoCompleteUnlock'
+    echo 'Enabled autocomplete'
+endfunction
 "}}}
+" vim expand region {{{
+vmap v <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
+
 "}}}
 "Not Using {{{
 
-let g:ycm_min_num_of_chars_for_completion = 5
+" NerdTree {{{
+"NerdTree Settings
+let NERDTreeShowBookmarks=1
+let NERDTreeIgnore=['\.o$', '\~$', '\.aux$','\.gz$','\.toc$','\.swp$','\.pdfsync$','\.dtx$','\.bbl$','\.blg$','\.fls$','\.fdb_latexmk','\.latexmain$','\.pyc$']
+nmap <silent><F2> :NERDTreeToggle<CR>
+imap <silent><F2> <Esc>:NERDTreeToggle<CR>
+" nmap <silent><F10> :VoomToggle<CR>
+" imap <silent><F10> <Esc>:VoomToggle<CR>
+" let tlist_tex_settings   = 'latex;s:sections;g:graphics;l:labels'
+" let tlist_make_settings  = 'make;m:makros;t:targets'
+"}}}
+" EasyMotion{{{
+" let g:EasyMotion_keys = 'fdsartewqbnvmcyuiop;lkj'
+" nmap <Space> <Plug>(easymotion-bd-w)
+" noremap <M-Space> <Plug>(easymotion-bd-f)
+" let g:EasyMotion_do_shade = 0
+" let g:EasyMotion_do_mapping = 1
+" nmap s <Plug>(easymotion-s)
+" nmap t <Plug>(easymotion-t)
+" " JK motions: Line motions
+" map <Leader>j <Plug>(easymotion-j)
+" map <Leader>k <Plug>(easymotion-k)
+" " Turn on case sensitive feature
+" let g:EasyMotion_smartcase = 1
+" let g:EasyMotion_enter_jump_first = 1
+" let g:EasyMotion_space_jump_first = 1
+"}}}
+" let g:ycm_min_num_of_chars_for_completion = 5
 " The Silver Search {{{
 " if executable('ag')
 " 	" Use ag over grep
@@ -446,7 +475,23 @@ let g:org_agenda_files = ['~/org/work.org','~/org/home.org']
 let g:org_todo_keywords = ['TODO(t)','PENDING(p)','|','DONE(d)','CANCELED(c)']
 let g:org_heading_highlight_colors = ['Title']
 "}}}
-
+" "netrw {{{
+" let g:netrw_altv          = 1
+" let g:netrw_fastbrowse    = 2
+" let g:netrw_keepdir       = 0
+" let g:netrw_liststyle     = 2
+" let g:netrw_retmap        = 1
+" let g:netrw_silent        = 1
+" let g:netrw_special_syntax= 1
+"
+" "  Hit enter in the file browser to open the selected
+" " file with :vsplit to the right of the browser.
+" let g:netrw_browse_split = 4
+" let g:netrw_altv = 1
+"
+" " Default to tree mode
+" let g:netrw_liststyle=3
+" "}}}
 " tagbar{{{
 nmap <F8> :TagbarToggle<CR>
 "}}}
