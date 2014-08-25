@@ -50,7 +50,7 @@ Plugin 'edkolev/tmuxline.vim'
 " Plugin 'gerw/vim-latex-suite'
 " Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
 Plugin 'jcf/vim-latex'
-Plugin 'latex-box-team/latex-box'
+" Plugin 'latex-box-team/latex-box'
 
 "=======================================
 "window managment
@@ -66,6 +66,7 @@ Plugin 'justinmk/vim-sneak'
 "=======================================
 Plugin 'tpope/vim-tbone'
 Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-sensible'
 " Plugin 'terryma/vim-multiple-cursors'
 Plugin 'kris89/vim-multiple-cursors'
 " Plugin 'majutsushi/tagbar'
@@ -84,6 +85,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 " Plugin 'DamienCassou/texlint'
 Plugin 'tpope/vim-fugitive'
+Plugin 'mhinz/vim-signify'
 " Plugin 'airblade/vim-gitgutter'
 call vundle#end()
 filetype plugin indent on
@@ -130,7 +132,7 @@ autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 "}}}
 " tmp directories{{{
 set backupdir=~/.vim/backup,.,/tmp
-set directory=./.vim/swp,.,/tmp
+set directory=~/.vim/swp,.,/tmp
 set undofile
 set undodir=~/.vim/undo
 " "set hidden
@@ -145,9 +147,11 @@ map <leader>e :tabe<space>
 "}}}
 " Shortcuts{{{
 nnoremap Q <nop>
-imap jj <Esc>
 imap jk <Esc>
 imap kj <Esc>
+vmap jk <Esc>
+imap kj <Esc>
+
 
 set shell=/bin/bash
 " noremap <C-s> :sh<cr>
@@ -229,6 +233,11 @@ augroup END
 "}}}
 "}}}
 "Plugins {{{
+" Sensible{{{
+set backspace
+set incsearch
+set listchars
+"}}}
 " "Unite {{{
 " nnoremap <leader>f :Unite -start-insert buffer file<cr>
 " nnoremap <leader>r :Unite -start-insert file_mru<cr>
@@ -265,7 +274,7 @@ endif
 "CtrlP{{{
 nmap <silent><leader>r :CtrlPMRUFiles<CR>
 nmap <C-t> :CtrlPBufTagAll<CR>
-nmap <C-e> :!ctags *<CR>:CtrlPTag<CR>
+nmap <C-e> :!ctags *<CR>:CtrlPTag<CR> 
 let g:ctrlp_max_files = 500
 let g:ctrlp_max_depth = 4
 " nmap <silent><leader>t :CtrlPBufTagAll<CR>
@@ -275,6 +284,8 @@ let g:ctrlp_buftag_types={
             \'tex':'',
             \'r':'',
             \}
+let g:ctrlp_mruf_include='\.c$\|\.py$\|\.pyx$\|\.r$\|\.cpp$\|\.bib$\|\.tex$'
+let g:ctrlp_mruf_case_sensitive=0
 " \ 'Splus':{
 " \	'bin':'ctags',
 " \	} ,
@@ -415,6 +426,8 @@ let r_syntax_folding = 1
 " neocompl{{{
 so ~/.vim/neocompl.vim
 au FileType tex let g:neocomplete#disable_auto_complete = 1
+let g:multi_cursor_quit_key='<cr>'
+
 function! Multiple_cursors_before()
     exe 'NeoCompleteLock'
     echo 'Disabled autocomplete'
