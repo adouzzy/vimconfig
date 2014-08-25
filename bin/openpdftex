@@ -1,0 +1,3 @@
+#!/bin/zsh
+# /Applications/Skim.app/Contents/MacOS/Skim $(find *.latexmain | cut -d'.' -f1).pdf & 
+open $(find *.latexmain | cut -d'.' -f1).pdf & 

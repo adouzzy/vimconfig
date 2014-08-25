@@ -1,0 +1,45 @@
+#!/bin/bash
+arg1=$1
+arg2=$2
+# echo $arg1 
+# echo $arg2
+# echo ${sessionNames[*]}
+sessionNames=(alpha beta gamma delta epsilon zeta eta theta iota kappa
+lambda mu nu xi omnicron pi rho sigma tau upsilon phi chi psi omega)
+tmux has-session  2>/dev/null
+if [ $? -eq 0 ]; then 
+    # aflag=$(tmux ls |grep attached ) 
+    attached=$(tmux ls | grep attached | wc -l)
+    all=$(tmux ls | wc -l)
+    if [ "$attached" -lt "$all" ]; then 
+        # terminator -e "tmux -2 attach -d "
+        # bash -c "tmux -2 attach -d"
+        tmux -2 attach -d
+        # echo "attach current"
+    else 
+        # echo "already on , new session"
+        names=$(tmux ls | cut -d':' -f1 | sort | paste -s -d',' -)
+        namelist=$(echo $names| tr "," "\n")
+        for candidate in "${sessionNames[@]}" ; do
+            ii=0
+            for name in $namelist ; do
+                if [ $candidate == $name ]; then
+                    ii=$(($ii+1))
+                fi 
+            done 
+            if [ $ii -eq 0 ]; then
+                break
+            fi
+        done
+        # urxvt -e tmux -2 new -s ${sessionNames[$ii]}
+        # bash -c "tmux -2 new -s $candidate"
+        # echo $candidate
+        tmux -2 new -s $candidate
+    fi 
+else 
+    # terminator -e "tmux -2 new -s 0"
+    # urxvt -e bash -c "tmux -2 new -s ${sessionNames[0]}"
+    # bash -c "tmux -2 new -s ${sessionNames[0]}"
+    tmux -2 new -s ${sessionNames[0]}
+    # echo "new sessions x"
+fi
