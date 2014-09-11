@@ -81,8 +81,8 @@ Plugin 'tomtom/tcomment_vim'
 ""Snips
 "=======================================
 Plugin 'scrooloose/nerdtree'
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+" Plugin 'SirVer/ultisnips'
+" Plugin 'honza/vim-snippets'
 " Plugin 'DamienCassou/texlint'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mhinz/vim-signify'
@@ -167,6 +167,7 @@ vnoremap ; :
 if has ("gui_running")
     if has ("gui_macvim")
         set guifont=Hermit-light:h15
+        set guifont=Hermit-light:h15
         set linespace=0
     elseif has("gui_gtk2")
         set guifont=Hermit\ Medium\ 13
@@ -234,9 +235,9 @@ augroup END
 "}}}
 "Plugins {{{
 " Sensible{{{
-set backspace
-set incsearch
-set listchars
+" set backspace
+" set incsearch
+" set listchars
 "}}}
 " "Unite {{{
 " nnoremap <leader>f :Unite -start-insert buffer file<cr>
