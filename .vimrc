@@ -115,6 +115,8 @@ set tabstop=4
 set expandtab
 set smarttab
 au FileType python setlocal ts=8 et sw=4 sts=4
+au FileType python setlocal fdm=indent
+" let python_highlight_all = 1
 " let g:pymode_rope=0
 au FileType workflowish setlocal ts=2 et sw=2 sts=2
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
@@ -149,8 +151,7 @@ map <leader>e :tabe<space>
 nnoremap Q <nop>
 imap jk <Esc>
 imap kj <Esc>
-vmap jk <Esc>
-imap kj <Esc>
+vnoremap <cr> <Esc>
 
 
 set shell=/bin/bash
@@ -252,26 +253,30 @@ let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " }}}
 "tube {{{
-if has ("gui_macvim")
-    let g:tube_terminal = 'iterm'
-    nmap <C-c><C-c> :Tube<cr>
-    nmap <leader>pd {v}:Tube@<cr>}<Down>
-    nmap [p {v}k$:Tube@<cr>}<Down>
-    nmap [o :TubeFocus<cr>
-else
-    "screen
-    let g:ScreenImpl ='GnuScreen'
-    " let g:ScreenImpl = 'Tmux'
-    let g:ScreenShellExternal=1
-    " let g:ScreenShellTerminal='iTerm2.app'
-    " let g:ScreenShellTerminal='/Applications/iTerm.app/Contents/MacOS/iTerm'
-    let g:ScreenShellTerminal='terminator'
-    nmap <C-c><C-c> :ScreenShell<cr>
-    nmap <leader>pd {v}:ScreenSend<cr>}<Down>
-    nmap [p {v}k$:ScreenSend<cr>}<Down>
-    " let g:ScreenShellHeight=0 
-endif
+" if has ("gui_macvim")
+"     let g:tube_terminal = 'iterm'
+"     nmap <C-c><C-c> :Tube<cr>
+"     nmap <leader>pd {v}:Tube@<cr>}<Down>
+"     nmap [p {v}k$:Tube@<cr>}<Down>
+"     nmap [o :TubeFocus<cr>
+" else
+"     "screen
+"     let g:ScreenImpl ='GnuScreen'
+"     " let g:ScreenImpl = 'Tmux'
+"     let g:ScreenShellExternal=1
+"     " let g:ScreenShellTerminal='iTerm2.app'
+"     " let g:ScreenShellTerminal='/Applications/iTerm.app/Contents/MacOS/iTerm'
+"     let g:ScreenShellTerminal='terminator'
+"     nmap <C-c><C-c> :ScreenShell<cr>
+"     nmap <leader>pd {v}:ScreenSend<cr>}<Down>
+"     nmap [p {v}k$:ScreenSend<cr>}<Down>
+"     " let g:ScreenShellHeight=0 
+" endif
 "}}}
+"Tbone {{{
+ nmap [p {v}k$:Twrite 1<cr>}<Down>
+
+" }}}}
 "CtrlP{{{
 nmap <silent><leader>r :CtrlPMRUFiles<CR>
 nmap <C-t> :CtrlPBufTagAll<CR>
