@@ -2,92 +2,94 @@
 " vim:foldlevel=0
 " vim:foldlevelstart=0
 " Vundle  {{{
-set nocompatible              " be iMproved
-filetype off                  " required!
-set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#begin()
+" set nocompatible              " be iMproved
+" filetype off                  " required!
+" set rtp+=~/.vim/bundle/Vundle.vim/
+" call vundle#begin()
+call plug#begin('~/.vim/plugged')
 "=======================================
 ""vundle
 "=======================================
-Plugin 'gmarik/Vundle.vim'
-Plugin 'chrisbra/Recover.vim'
-" Plugin 'Chiel92/vim-autoformat'
-" Plugin 'Shougo/vimproc.vim'
-" Plugin 'Shougo/neomru.vim'
-" Plugin 'Shougo/unite.vim'
-" Plugin 'rking/ag.vim'
-Plugin 'kien/ctrlp.vim'
-Plugin 'jazzcore/ctrlp-cmatcher'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-speeddating'
-" Plugin 'xolox/vim-notes'
-" Plugin 'xolox/vim-misc'
-Plugin 'adouzzy/workflowish'
-" Plugin 'scrooloose/syntastic'
-" Plugin 'Valloric/YouCompleteMe'
-" Plugin 'ervandew/supertab'
-Plugin 'Shougo/neocomplete.vim'
-" Plugin 'terryma/vim-expand-region'
+Plug 'gmarik/Vundle.vim'
+Plug 'chrisbra/Recover.vim'
+" Plug 'Chiel92/vim-autoformat'
+" Plug 'Shougo/vimproc.vim'
+" Plug 'Shougo/neomru.vim'
+" Plug 'Shougo/unite.vim'
+" Plug 'rking/ag.vim'
+Plug 'kien/ctrlp.vim'
+Plug 'jazzcore/ctrlp-cmatcher'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-speeddating'
+" Plug 'xolox/vim-notes'
+" Plug 'xolox/vim-misc'
+Plug 'adouzzy/workflowish'
+" Plug 'scrooloose/syntastic'
+" Plug 'Valloric/YouCompleteMe'
+" Plug 'ervandew/supertab'
+Plug 'Shougo/neocomplete.vim'
+" Plug 'terryma/vim-expand-region'
 "=======================================
 "Optional lightweight
 "=======================================
-Plugin 'jcfaria/vim-r-plugin'
-Plugin 'christoomey/vim-tmux-navigator'
+Plug 'jcfaria/vim-r-plugin'
+Plug 'christoomey/vim-tmux-navigator'
 "=======================================
 "ui related
 "=======================================
-"Plugin 'tomasr/molokai'
-" Plugin 'junegunn/limelight.vim'
-Plugin 'junegunn/goyo.vim'
-" Plugin 'nathanaelkane/vim-indent-guides'
-" Plugin 'bling/vim-airline'
-Plugin 'itchyny/lightline.vim'
-Plugin 'edkolev/tmuxline.vim'
+"Plug 'tomasr/molokai'
+" Plug 'junegunn/limelight.vim'
+Plug 'junegunn/goyo.vim'
+" Plug 'nathanaelkane/vim-indent-guides'
+" Plug 'bling/vim-airline'
+Plug 'itchyny/lightline.vim'
+Plug 'edkolev/tmuxline.vim'
 "=======================================
 "language support
 "=======================================
-" Plugin 'davidhalter/jedi-vim'
-" Plugin 'gerw/vim-latex-suite'
-" Plugin 'git://git.code.sf.net/p/vim-latex/vim-latex'
-Plugin 'jcf/vim-latex'
-" Plugin 'latex-box-team/latex-box'
+" Plug 'davidhalter/jedi-vim'
+" Plug 'gerw/vim-latex-suite'
+" Plug 'git://git.code.sf.net/p/vim-latex/vim-latex'
+Plug 'jcf/vim-latex'
+" Plug 'latex-box-team/latex-box'
 
 "=======================================
 "window managment
 "=======================================
-" Plugin 'ervandew/screen'
+" Plug 'ervandew/screen'
 "=======================================
 " move around
 "=======================================
-" Plugin 'lokaltog/vim-easymotion'
-Plugin 'justinmk/vim-sneak'
+" Plug 'lokaltog/vim-easymotion'
+Plug 'justinmk/vim-sneak'
 "=======================================
 " ide stuff
 "=======================================
-Plugin 'tpope/vim-tbone'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-sensible'
-" Plugin 'terryma/vim-multiple-cursors'
-Plugin 'kris89/vim-multiple-cursors'
-" Plugin 'majutsushi/tagbar'
-Plugin 'tomtom/tcomment_vim'
+Plug 'tpope/vim-tbone'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-sensible'
+" Plug 'terryma/vim-multiple-cursors'
+Plug 'kris89/vim-multiple-cursors'
+" Plug 'majutsushi/tagbar'
+Plug 'tomtom/tcomment_vim'
 "=======================================
 "" ORG MODE
 "=======================================
-" Plugin 'vim-voom/VOoM'
-" Plugin 'jceb/vim-orgmode'
-" Plugin 'mattn/calendar-vim'
+" Plug 'vim-voom/VOoM'
+" Plug 'jceb/vim-orgmode'
+" Plug 'mattn/calendar-vim'
 "=======================================
 ""Snips
 "=======================================
-Plugin 'scrooloose/nerdtree'
-" Plugin 'SirVer/ultisnips'
-" Plugin 'honza/vim-snippets'
-" Plugin 'DamienCassou/texlint'
-Plugin 'tpope/vim-fugitive'
-Plugin 'mhinz/vim-signify'
-" Plugin 'airblade/vim-gitgutter'
-call vundle#end()
+Plug 'scrooloose/nerdtree'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
+" Plug 'DamienCassou/texlint'
+Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
+" Plug 'airblade/vim-gitgutter'
+" call vundle#end()
+call plug#end()
 filetype plugin indent on
 syntax on
 "}}}
