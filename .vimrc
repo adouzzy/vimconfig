@@ -32,7 +32,7 @@ Plug 'Shougo/neocomplete.vim'
 "=======================================
 "Optional lightweight
 "=======================================
-Plug 'jcfaria/vim-r-plugin'
+" Plug 'jcfaria/vim-r-plugin'
 Plug 'christoomey/vim-tmux-navigator'
 "=======================================
 "ui related
@@ -51,6 +51,7 @@ Plug 'edkolev/tmuxline.vim'
 " Plug 'gerw/vim-latex-suite'
 " Plug 'git://git.code.sf.net/p/vim-latex/vim-latex'
 Plug 'jcf/vim-latex'
+Plug 'neilagabriel/vim-geeknote'
 " Plug 'latex-box-team/latex-box'
 
 "=======================================
