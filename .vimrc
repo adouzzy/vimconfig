@@ -51,7 +51,7 @@ Plug 'edkolev/tmuxline.vim'
 " Plug 'gerw/vim-latex-suite'
 " Plug 'git://git.code.sf.net/p/vim-latex/vim-latex'
 Plug 'jcf/vim-latex'
-Plug 'neilagabriel/vim-geeknote'
+" Plug 'neilagabriel/vim-geeknote', {'branch' : 'adouzzy'}
 " Plug 'latex-box-team/latex-box'
 
 "=======================================
@@ -422,13 +422,13 @@ let g:tmuxline_preset = 'full'
 " let g:airline_right_sep = '◀'
 " let g:airline#extensions#whitespace#enabled = 0
 " let g:airline#extensions#tabline#enabled = 1
-" let g:tmuxline_separators = {
-" 			\ 'left' : '',
-" 			\ 'left_alt': '>',
-" 			\ 'right' : '',
-" 			\ 'right_alt' : '<',
-" 			\ 'space' : ' '}
-"}}}
+let g:tmuxline_separators = {
+			\ 'left' : '',
+			\ 'left_alt': '>',
+			\ 'right' : '',
+			\ 'right_alt' : '<',
+			\ 'space' : ' '}
+" }}}
 "R plugin{{{
 let r_syntax_folding = 1
 "}}}
