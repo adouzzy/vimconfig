@@ -1,6 +1,9 @@
 " vim:fdm=marker
 " vim:foldlevel=0
 " vim:foldlevelstart=0
+if has('nvim')
+    runtime! plugin/python_setup.vim
+endif
 " Vundle  {{{
 " set nocompatible              " be iMproved
 " filetype off                  " required!
@@ -17,7 +20,7 @@ Plug 'chrisbra/Recover.vim'
 " Plug 'Shougo/neomru.vim'
 " Plug 'Shougo/unite.vim'
 " Plug 'rking/ag.vim'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jazzcore/ctrlp-cmatcher'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-speeddating'
@@ -25,9 +28,9 @@ Plug 'tpope/vim-speeddating'
 " Plug 'xolox/vim-misc'
 Plug 'adouzzy/workflowish'
 " Plug 'scrooloose/syntastic'
-" Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 " Plug 'ervandew/supertab'
-Plug 'Shougo/neocomplete.vim'
+" Plug 'Shougo/neocomplete.vim'
 " Plug 'terryma/vim-expand-region'
 "=======================================
 "Optional lightweight
@@ -41,8 +44,8 @@ Plug 'christoomey/vim-tmux-navigator'
 " Plug 'junegunn/limelight.vim'
 Plug 'junegunn/goyo.vim'
 " Plug 'nathanaelkane/vim-indent-guides'
-" Plug 'bling/vim-airline'
-Plug 'itchyny/lightline.vim'
+Plug 'bling/vim-airline'
+" Plug 'itchyny/lightline.vim'
 Plug 'edkolev/tmuxline.vim'
 "=======================================
 "language support
@@ -50,7 +53,7 @@ Plug 'edkolev/tmuxline.vim'
 " Plug 'davidhalter/jedi-vim'
 " Plug 'gerw/vim-latex-suite'
 " Plug 'git://git.code.sf.net/p/vim-latex/vim-latex'
-Plug 'jcf/vim-latex'
+Plug 'jcf/vim-latex',{'for': 'tex'}
 " Plug 'neilagabriel/vim-geeknote', {'branch' : 'adouzzy'}
 " Plug 'latex-box-team/latex-box'
 
@@ -82,9 +85,9 @@ Plug 'tomtom/tcomment_vim'
 "=======================================
 ""Snips
 "=======================================
-Plug 'scrooloose/nerdtree'
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
+" Plug 'scrooloose/nerdtree'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 " Plug 'DamienCassou/texlint'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
@@ -121,6 +124,7 @@ au FileType python setlocal ts=8 et sw=4 sts=4
 au FileType python setlocal fdm=indent
 " let python_highlight_all = 1
 " let g:pymode_rope=0
+let g:pymode_rope_complete_on_dot = 0
 au FileType workflowish setlocal ts=2 et sw=2 sts=2
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 set mouse=a
@@ -147,8 +151,12 @@ let mapleader = ','
 let g:mapleader = ','
 let maplocalleader = '\'
 let g:maplocalleader = '\'
-map <leader>d :bd<cr>
-map <leader>e :tabe<space>
+" nmap <leader>d :bd<cr>
+nmap <leader>n :bnext<cr>
+nmap <leader>h :bnext<cr>
+nmap <leader>p :bprevious<cr>
+nmap <leader>l :bprevious<cr>
+nmap <leader>d :bp <bar> bd #<cr>
 "}}}
 " Shortcuts{{{
 nnoremap Q <nop>
@@ -238,6 +246,7 @@ augroup END
 "}}}
 "}}}
 "Plugins {{{
+let g:multi_cursor_quit_key='<cr>'
 " Sensible{{{
 " set backspace
 " set incsearch
@@ -284,6 +293,9 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 nmap <silent><leader>r :CtrlPMRUFiles<CR>
 nmap <C-t> :CtrlPBufTagAll<CR>
 nmap <C-e> :!ctags *<CR>:CtrlPTag<CR> 
+let g:ctrlp_open_new_file = 't'
+let g:ctrlp_switch_buffer = 'ET'
+" let g:ctrlp_reuse_window = 'netrw\|buf\|help'
 let g:ctrlp_max_files = 500
 let g:ctrlp_max_depth = 4
 " nmap <silent><leader>t :CtrlPBufTagAll<CR>
@@ -394,7 +406,7 @@ nmap <silent><F3> :w<CR>:!rubberme&<CR><CR>
 imap <silent><F3> <Esc>:w<CR>:!rubberme&<CR><CR>
 " imap <silent><F6> <Esc>:GitGutterToggle<CR>
 " nmap <silent><F6> :GitGutterToggle<CR>
-imap <buffer> ]] <Plug>LatexCloseCurEnv
+" imap <buffer> ]] <Plug>LatexCloseCurEnv
 let g:Tex_TreatMacViewerAsUNIX=1
 "}}}
 " Status lines{{{
@@ -403,25 +415,25 @@ let g:lightline= {
             \ 'colorscheme' : 'jellybeans'
             \}
 "Tmux line
-let g:tmuxline_preset = 'full'
-" let g:tmuxline_preset = {
-"       \'a'    : '#S',
-"       \'b'    : '#W',
-"       \'c'    : '#H',
-"       \'win'  : '#I #W',
-"       \'cwin' : '#I #W',
-"       \'x'    : '%a',
-"       \'y'    : '#W %R',
-"       \'z'    : '#H'}
-
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'win'  : '#I #W',
+      \'cwin' : '#I #W',
+      \'y'    : ['%R', '%a']}
+"
+      " \'x'    : '#(pmset -g batt | egrep "([0-9]+\%)" -o)',
+      " \'x' : ['#(uptime | cut -d ' ' -f 10)', '#(pmset -g batt | egrep ''([0-9]+\%)'' -o | cut -f1 -d'';'')'],
 "Air line
-" let g:airline#extensions#tabline#enabled =1
-" let g:airline_left_sep = '»'
-" let g:airline_left_sep = '▶'
-" let g:airline_right_sep = '«'
-" let g:airline_right_sep = '◀'
-" let g:airline#extensions#whitespace#enabled = 0
-" let g:airline#extensions#tabline#enabled = 1
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#tabline#enabled = 1
+" Enable the list of buffers
+let g:airline#extensions#tabline#enabled = 1
+" Show just the filename
+let g:airline#extensions#tabline#fnamemod = ':t'
 let g:tmuxline_separators = {
 			\ 'left' : '',
 			\ 'left_alt': '>',
@@ -433,18 +445,17 @@ let g:tmuxline_separators = {
 let r_syntax_folding = 1
 "}}}
 " neocompl{{{
-so ~/.vim/neocompl.vim
-au FileType tex let g:neocomplete#disable_auto_complete = 1
-let g:multi_cursor_quit_key='<cr>'
-
-function! Multiple_cursors_before()
-    exe 'NeoCompleteLock'
-    echo 'Disabled autocomplete'
-endfunction
-function! Multiple_cursors_after()
-    exe 'NeoCompleteUnlock'
-    echo 'Enabled autocomplete'
-endfunction
+" so ~/.vim/neocompl.vim
+" au FileType tex let g:neocomplete#disable_auto_complete = 1
+"
+" function! Multiple_cursors_before()
+"     exe 'NeoCompleteLock'
+"     echo 'Disabled autocomplete'
+" endfunction
+" function! Multiple_cursors_after()
+"     exe 'NeoCompleteUnlock'
+"     echo 'Enabled autocomplete'
+" endfunction
 "}}}
 " vim expand region {{{
 vmap v <Plug>(expand_region_expand)
