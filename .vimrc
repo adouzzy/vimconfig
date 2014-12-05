@@ -2,7 +2,7 @@
 " vim:foldlevel=0
 " vim:foldlevelstart=0
 if has('nvim')
-    runtime! plugin/python_setup.vim
+    " runtime! python_setup.vim
 endif
 " Vundle  {{{
 " set nocompatible              " be iMproved
@@ -13,12 +13,9 @@ call plug#begin('~/.vim/plugged')
 "=======================================
 ""vundle
 "=======================================
-Plug 'gmarik/Vundle.vim'
+" Plug 'gmarik/Vundle.vim'
 Plug 'chrisbra/Recover.vim'
 " Plug 'Chiel92/vim-autoformat'
-" Plug 'Shougo/vimproc.vim'
-" Plug 'Shougo/neomru.vim'
-" Plug 'Shougo/unite.vim'
 " Plug 'rking/ag.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'jazzcore/ctrlp-cmatcher'
@@ -57,6 +54,8 @@ Plug 'jcf/vim-latex',{'for': 'tex'}
 " Plug 'neilagabriel/vim-geeknote', {'branch' : 'adouzzy'}
 " Plug 'latex-box-team/latex-box'
 
+" Plug 'Shougo/vimproc.vim'
+" Plug 'Shougo/vimshell.vim'
 "=======================================
 "window managment
 "=======================================
@@ -92,6 +91,7 @@ Plug 'honza/vim-snippets'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 " Plug 'airblade/vim-gitgutter'
+
 " call vundle#end()
 call plug#end()
 filetype plugin indent on
@@ -151,17 +151,18 @@ let mapleader = ','
 let g:mapleader = ','
 let maplocalleader = '\'
 let g:maplocalleader = '\'
-" nmap <leader>d :bd<cr>
+nmap <leader>d :bd<cr>
 nmap <leader>n :bnext<cr>
 nmap <leader>h :bnext<cr>
 nmap <leader>p :bprevious<cr>
 nmap <leader>l :bprevious<cr>
-nmap <leader>d :bp <bar> bd #<cr>
+" nmap <leader>d :bp <bar> bd #<cr>
 "}}}
 " Shortcuts{{{
 nnoremap Q <nop>
-imap jk <Esc>
-imap kj <Esc>
+" imap jk <Esc>
+" imap kj <Esc>
+imap ,, <Esc>
 vnoremap <cr> <Esc>
 
 
@@ -200,7 +201,7 @@ hi IndentGuidesEven ctermbg=236
 
 
 "}}}
-set autochdir
+set noautochdir
 " Restore Position {{{
 
 " Tell vim to remember certain things when we exit
@@ -318,7 +319,7 @@ let g:ctrlp_mruf_case_sensitive=0
 "Goyo Zen mode {{{
 nnoremap <Leader>z :Goyo<CR>
 let g:goyo_margin_top=2
-let g:goyo_width=74
+let g:goyo_width=72
 let g:goyo_margin_bottom=0
 " Color name (:help cterm-colors) or ANSI code
 " let g:limelight_conceal_ctermfg = 'gray'
@@ -407,6 +408,8 @@ imap <silent><F3> <Esc>:w<CR>:!rubberme&<CR><CR>
 " imap <silent><F6> <Esc>:GitGutterToggle<CR>
 " nmap <silent><F6> :GitGutterToggle<CR>
 " imap <buffer> ]] <Plug>LatexCloseCurEnv
+nmap <Leader>hv <Plug>GitGutterPreviewHunk
+
 let g:Tex_TreatMacViewerAsUNIX=1
 "}}}
 " Status lines{{{
