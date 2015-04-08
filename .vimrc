@@ -3,6 +3,7 @@
 " vim:foldlevelstart=0
 if has('nvim')
     " runtime! python_setup.vim
+    let g:python_host_prog='/usr/local/bin/python'
 endif
 " Vundle  {{{
 " set nocompatible              " be iMproved
@@ -13,19 +14,18 @@ call plug#begin('~/.vim/plugged')
 "=======================================
 ""vundle
 "=======================================
-" Plug 'gmarik/Vundle.vim'
 Plug 'chrisbra/Recover.vim'
 " Plug 'Chiel92/vim-autoformat'
-" Plug 'rking/ag.vim'
+Plug 'rking/ag.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-Plug 'jazzcore/ctrlp-cmatcher'
+" Plug 'jazzcore/ctrlp-cmatcher'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-speeddating'
+" Plug 'tpope/vim-speeddating'
 " Plug 'xolox/vim-notes'
 " Plug 'xolox/vim-misc'
 Plug 'adouzzy/workflowish'
 " Plug 'scrooloose/syntastic'
-Plug 'Valloric/YouCompleteMe'
+" Plug 'Valloric/YouCompleteMe'
 " Plug 'ervandew/supertab'
 " Plug 'Shougo/neocomplete.vim'
 " Plug 'terryma/vim-expand-region'
@@ -50,7 +50,7 @@ Plug 'edkolev/tmuxline.vim'
 " Plug 'davidhalter/jedi-vim'
 " Plug 'gerw/vim-latex-suite'
 " Plug 'git://git.code.sf.net/p/vim-latex/vim-latex'
-Plug 'jcf/vim-latex',{'for': 'tex'}
+" Plug 'jcf/vim-latex',{'for': 'tex'}
 " Plug 'neilagabriel/vim-geeknote', {'branch' : 'adouzzy'}
 " Plug 'latex-box-team/latex-box'
 
@@ -85,8 +85,8 @@ Plug 'tomtom/tcomment_vim'
 ""Snips
 "=======================================
 " Plug 'scrooloose/nerdtree'
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
 " Plug 'DamienCassou/texlint'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
