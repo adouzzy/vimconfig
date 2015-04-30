@@ -18,14 +18,14 @@ Plug 'chrisbra/Recover.vim'
 " Plug 'Chiel92/vim-autoformat'
 Plug 'rking/ag.vim'
 Plug 'ctrlpvim/ctrlp.vim'
-" Plug 'jazzcore/ctrlp-cmatcher'
+Plug 'jazzcore/ctrlp-cmatcher'
 Plug 'tpope/vim-surround'
 " Plug 'tpope/vim-speeddating'
 " Plug 'xolox/vim-notes'
 " Plug 'xolox/vim-misc'
-Plug 'adouzzy/workflowish'
+" Plug 'adouzzy/workflowish'
 " Plug 'scrooloose/syntastic'
-" Plug 'Valloric/YouCompleteMe'
+Plug 'Valloric/YouCompleteMe'
 " Plug 'ervandew/supertab'
 " Plug 'Shougo/neocomplete.vim'
 " Plug 'terryma/vim-expand-region'
@@ -33,7 +33,9 @@ Plug 'adouzzy/workflowish'
 "Optional lightweight
 "=======================================
 " Plug 'jcfaria/vim-r-plugin'
+Plug 'jalvesaq/Nvim-R'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'kassio/neoterm'
 "=======================================
 "ui related
 "=======================================
@@ -53,7 +55,6 @@ Plug 'edkolev/tmuxline.vim'
 " Plug 'jcf/vim-latex',{'for': 'tex'}
 " Plug 'neilagabriel/vim-geeknote', {'branch' : 'adouzzy'}
 " Plug 'latex-box-team/latex-box'
-
 " Plug 'Shougo/vimproc.vim'
 " Plug 'Shougo/vimshell.vim'
 "=======================================
@@ -71,8 +72,8 @@ Plug 'justinmk/vim-sneak'
 Plug 'tpope/vim-tbone'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
-" Plug 'terryma/vim-multiple-cursors'
-Plug 'kris89/vim-multiple-cursors'
+Plug 'terryma/vim-multiple-cursors'
+" Plug 'kris89/vim-multiple-cursors'
 " Plug 'majutsushi/tagbar'
 Plug 'tomtom/tcomment_vim'
 "=======================================
@@ -92,8 +93,11 @@ Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 " Plug 'airblade/vim-gitgutter'
 
-" call vundle#end()
 call plug#end()
+
+let g:plug_threads=15
+
+
 filetype plugin indent on
 syntax on
 "}}}
@@ -125,6 +129,7 @@ au FileType python setlocal fdm=indent
 " let python_highlight_all = 1
 " let g:pymode_rope=0
 let g:pymode_rope_complete_on_dot = 0
+au FileType workflowish setlocal ts=2 et sw=2 sts=2
 au FileType workflowish setlocal ts=2 et sw=2 sts=2
 autocmd BufWritePre *.py normal m`:%s/\s\+$//e``
 set mouse=a
@@ -506,7 +511,6 @@ imap <silent><F2> <Esc>:NERDTreeToggle<CR>
 " 	let g:ctrlp_use_caching = 0
 " endif
 "}}}
-"vim-Org {{{
 let g:org_agenda_files = ['~/org/work.org','~/org/home.org']
 let g:org_todo_keywords = ['TODO(t)','PENDING(p)','|','DONE(d)','CANCELED(c)']
 let g:org_heading_highlight_colors = ['Title']
